@@ -66,25 +66,10 @@
           <span class="ml-baustelle-name">{{ baustelleName(item.baustellenId) }}</span>
         </template>
         <template #item.status="{ item }">
-          <div class="ml-status-cell" @click.stop>
-            <span class="bp-status">
-              <span class="bp-dot" :class="`bp-dot--${item.status}`" />
-              {{ statusLabel(item.status) }}
-            </span>
-            <v-select
-              :model-value="item.status"
-              :items="statusOptions"
-              density="compact"
-              variant="plain"
-              hide-details
-              class="ml-status-select"
-              @update:model-value="(v: any) => maengelStore.updateStatus(item.id, v)"
-            >
-              <template #prepend-inner>
-                <v-icon size="13" color="#94A3B8">mdi-pencil</v-icon>
-              </template>
-            </v-select>
-          </div>
+          <span class="bp-status">
+            <span class="bp-dot" :class="`bp-dot--${item.status}`" />
+            {{ statusLabel(item.status) }}
+          </span>
         </template>
         <template #item.erstelltAm="{ item }">
           <span class="bp-mono" style="font-size:11px;color:#64748B">{{ item.erstelltAm }}</span>
@@ -211,22 +196,4 @@ function statusLabel(s: MaengelStatus) {
   color: #2563EB;
 }
 
-/* Status cell: dot+label on left, small edit select on right */
-.ml-status-cell {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  min-width: 220px;
-}
-
-.ml-status-select {
-  width: 110px;
-  font-size: 11px !important;
-  opacity: 0.5;
-  transition: opacity 0.15s;
-}
-.ml-status-cell:hover .ml-status-select {
-  opacity: 1;
-}
 </style>

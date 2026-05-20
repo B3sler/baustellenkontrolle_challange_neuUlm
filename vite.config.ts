@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
 export default defineConfig({
+  base: '/baustellenkontrolle_challange_neuUlm/',
   plugins: [
     vue(),
     vuetify({ autoImport: true }),

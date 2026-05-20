@@ -58,101 +58,104 @@
     </div>
 
     <div class="bv-content">
-      <v-window v-model="activeTab">
+      <v-window v-model="activeTab" class="bv-window">
         <!-- Tab: Übersicht -->
-        <v-window-item value="uebersicht">
-          <div class="bv-overview-grid">
-            <div class="bv-data-card">
-              <div class="bp-section-header">
-                <span class="bp-section-title">Stammdaten</span>
+        <v-window-item value="uebersicht" class="bv-window-item">
+          <div class="bv-uebersicht-layout">
+
+            <!-- Left: Stammdaten (scrollable) -->
+            <div class="bv-stammdaten-col">
+              <div class="bv-stammdaten-header bp-mono">Stammdaten</div>
+
+              <div class="bv-data-group-label bp-mono">Allgemein</div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Genehmigung</span>
+                <span class="bv-data-value bp-mono">{{ baustelle.genehmigungsNr }}</span>
               </div>
-              <div class="bv-data-list">
-                <div class="bv-data-group-label bp-mono">Allgemein</div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Genehmigung</span>
-                  <span class="bv-data-value bp-mono">{{ baustelle.genehmigungsNr }}</span>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Zeitraum</span>
-                  <span class="bv-data-value bp-mono">{{ baustelle.startDatum }} – {{ baustelle.endDatum }}</span>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Priorität</span>
-                  <span class="bp-prio" :class="`bp-prio--${baustelle.prioritaet}`">{{ baustelle.prioritaet }}</span>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Auftragswert</span>
-                  <span class="bv-data-value bv-data-value--bold">{{ baustelle.auftragswert }}</span>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Offene Mängel</span>
-                  <span class="bv-maengel-val">{{ baustelle.offenerMaengelCount }}</span>
-                </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Zeitraum</span>
+                <span class="bv-data-value bp-mono">{{ baustelle.startDatum }} – {{ baustelle.endDatum }}</span>
+              </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Priorität</span>
+                <span class="bp-prio" :class="`bp-prio--${baustelle.prioritaet}`">{{ baustelle.prioritaet }}</span>
+              </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Auftragswert</span>
+                <span class="bv-data-value bv-data-value--bold">{{ baustelle.auftragswert }}</span>
+              </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Offene Mängel</span>
+                <span class="bv-maengel-val">{{ baustelle.offenerMaengelCount }}</span>
+              </div>
 
-                <div class="bv-data-group-label bp-mono" style="margin-top:10px">Auftragnehmer</div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Firma</span>
-                  <span class="bv-data-value bv-data-value--bold">{{ baustelle.firma }}</span>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Ansprechpartner</span>
-                  <span class="bv-data-value">{{ baustelle.ansprechpartner }}</span>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Telefon</span>
-                  <a :href="`tel:${baustelle.telefon}`" class="bv-data-link">{{ baustelle.telefon }}</a>
-                </div>
-                <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">E-Mail</span>
-                  <a :href="`mailto:${baustelle.email}`" class="bv-data-link">{{ baustelle.email }}</a>
-                </div>
+              <div class="bv-data-group-label bp-mono" style="margin-top:14px">Auftragnehmer</div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Firma</span>
+                <span class="bv-data-value bv-data-value--bold">{{ baustelle.firma }}</span>
+              </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Ansprechpartner</span>
+                <span class="bv-data-value">{{ baustelle.ansprechpartner }}</span>
+              </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">Telefon</span>
+                <a :href="`tel:${baustelle.telefon}`" class="bv-data-link">{{ baustelle.telefon }}</a>
+              </div>
+              <div class="bv-data-row">
+                <span class="bv-data-label bp-mono">E-Mail</span>
+                <a :href="`mailto:${baustelle.email}`" class="bv-data-link">{{ baustelle.email }}</a>
+              </div>
 
-                <div class="bv-data-group-label bp-mono" style="margin-top:10px">Beschreibung</div>
-                <div class="bv-data-desc">{{ baustelle.beschreibung }}</div>
+              <div class="bv-data-group-label bp-mono" style="margin-top:14px">Beschreibung</div>
+              <div class="bv-data-desc">{{ baustelle.beschreibung }}</div>
+            </div>
+
+            <!-- Right: Map (2/3) + Timeline (1/3, scrollable) -->
+            <div class="bv-right-col">
+              <div class="bv-map-card">
+                <MapView
+                  :baustellen="[baustelle]"
+                  :maengel="[]"
+                  :center="[baustelle.lat, baustelle.lng]"
+                  :zoom="15"
+                />
+              </div>
+              <div class="bv-timeline-card">
+                <div class="bv-timeline-header bp-mono">Verlauf</div>
+                <div class="bv-timeline">
+                  <div class="bv-tl-item">
+                    <div class="bv-tl-dot bv-tl-dot--green" />
+                    <div class="bv-tl-line" />
+                    <div class="bv-tl-body">
+                      <span class="bv-tl-title">Baustelle eröffnet</span>
+                      <span class="bv-tl-date bp-mono">{{ baustelle.startDatum }}</span>
+                    </div>
+                  </div>
+                  <div class="bv-tl-item">
+                    <div class="bv-tl-dot bv-tl-dot--amber" />
+                    <div class="bv-tl-line" />
+                    <div class="bv-tl-body">
+                      <span class="bv-tl-title">Erster Mangel gemeldet</span>
+                      <span class="bv-tl-date bp-mono">{{ firstMangelDate }}</span>
+                    </div>
+                  </div>
+                  <div class="bv-tl-item">
+                    <div class="bv-tl-dot bv-tl-dot--blue" />
+                    <div class="bv-tl-body">
+                      <span class="bv-tl-title">Aktueller Status: {{ statusLabel(baustelle.status) }}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="bv-map-card">
-              <MapView
-                :baustellen="[baustelle]"
-                :maengel="[]"
-                :center="[baustelle.lat, baustelle.lng]"
-                :zoom="15"
-              />
-            </div>
-          </div>
 
-          <!-- Timeline -->
-          <div class="bv-timeline-card">
-            <div class="bp-section-title mb-3">Verlauf</div>
-            <div class="bv-timeline">
-              <div class="bv-tl-item">
-                <div class="bv-tl-dot bv-tl-dot--green" />
-                <div class="bv-tl-line" />
-                <div class="bv-tl-body">
-                  <span class="bv-tl-title">Baustelle eröffnet</span>
-                  <span class="bv-tl-date bp-mono">{{ baustelle.startDatum }}</span>
-                </div>
-              </div>
-              <div class="bv-tl-item">
-                <div class="bv-tl-dot bv-tl-dot--amber" />
-                <div class="bv-tl-line" />
-                <div class="bv-tl-body">
-                  <span class="bv-tl-title">Erster Mangel gemeldet</span>
-                  <span class="bv-tl-date bp-mono">{{ firstMangelDate }}</span>
-                </div>
-              </div>
-              <div class="bv-tl-item">
-                <div class="bv-tl-dot bv-tl-dot--blue" />
-                <div class="bv-tl-body">
-                  <span class="bv-tl-title">Aktueller Status: {{ statusLabel(baustelle.status) }}</span>
-                </div>
-              </div>
-            </div>
           </div>
         </v-window-item>
 
         <!-- Tab: Mängel -->
-        <v-window-item value="maengel">
+        <v-window-item value="maengel" class="bv-window-item">
+          <div class="bv-tab-scroll">
           <div class="bv-section-wrap">
             <v-data-table
               :headers="maengelHeaders"
@@ -188,10 +191,12 @@
               </template>
             </v-data-table>
           </div>
+          </div>
         </v-window-item>
 
         <!-- Tab: Dokumente & Bilder -->
-        <v-window-item value="dokumente">
+        <v-window-item value="dokumente" class="bv-window-item">
+          <div class="bv-tab-scroll">
           <div class="bv-dok-grid">
             <!-- Dokumente -->
             <div class="bv-dok-col">
@@ -258,6 +263,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </v-window-item>
       </v-window>
@@ -398,9 +404,10 @@ function addDummyBild() {
 <style scoped>
 .bv-view {
   background: #F8FAFC;
-  min-height: 100%;
+  height: calc(100vh - 56px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .bv-page-header {
@@ -505,8 +512,70 @@ function addDummyBild() {
 }
 
 .bv-content {
-  padding: 20px 24px 24px;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+:deep(.bv-window) {
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+}
+:deep(.bv-window .v-window__container) {
+  height: 100%;
+}
+:deep(.bv-window-item) {
+  height: 100%;
+}
+
+.bv-uebersicht-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: 100%;
+  padding: 16px 24px 24px;
+  box-sizing: border-box;
+}
+
+.bv-stammdaten-header {
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #CBD5E1;
+  margin-bottom: 10px;
+}
+
+.bv-stammdaten-col {
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.bv-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.bv-tab-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 24px 24px;
+  box-sizing: border-box;
+}
+
+.bv-timeline-header {
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #CBD5E1;
+  margin-bottom: 12px;
 }
 
 .bv-overview-grid {
@@ -594,17 +663,21 @@ function addDummyBild() {
 }
 
 .bv-map-card {
+  flex: 2;
   border: 1px solid #E2E8F0;
   border-radius: 10px;
   overflow: hidden;
-  min-height: 360px;
+  min-height: 0;
 }
 
 .bv-timeline-card {
+  flex: 1;
+  overflow-y: auto;
   background: #fff;
   border: 1px solid #E2E8F0;
   border-radius: 10px;
-  padding: 18px;
+  padding: 16px 18px;
+  min-height: 0;
 }
 
 .bv-timeline {
