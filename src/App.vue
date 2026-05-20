@@ -1,9 +1,14 @@
 <template>
   <v-app>
+    <AppHeader />
     <v-main>
-      <v-container>
-        <h1>NeuBautUlm</h1>
-      </v-container>
+      <Tabbar />
+      <router-view />
     </v-main>
   </v-app>
 </template>
+
+<script setup lang="ts">
+import AppHeader from './components/AppHeader.vue'
+import Tabbar from './components/Tabbar.vue'
+</script>
