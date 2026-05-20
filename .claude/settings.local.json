@@ -6,7 +6,22 @@
       "Bash(echo \"EXIT: $?\")",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(node -e \"const pkg = require\\('./package.json'\\); const required = ['vuetify', 'vite-plugin-vuetify', '@mdi/font', 'pinia', 'vue-router', 'leaflet', '@vue-leaflet/vue-leaflet', '@types/leaflet', 'vitest', '@vue/test-utils', 'jsdom']; const devRequired = required.concat\\(['@vitejs/plugin-vue']\\); const all = {...pkg.dependencies, ...pkg.devDependencies}; const missing = []; for \\(const dep of ['vuetify', 'vite-plugin-vuetify', '@mdi/font', 'pinia', 'vue-router', 'leaflet', '@vue-leaflet/vue-leaflet', '@types/leaflet', 'vitest', '@vue/test-utils', 'jsdom', '@vitejs/plugin-vue']\\) { if \\(!all[dep]\\) missing.push\\(dep\\); } console.log\\(missing.length ? 'MISSING: ' + missing.join\\(', '\\) : 'ALL REQUIRED DEPS PRESENT'\\);\")",
+      "Bash(git:*)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(lsof -ti:5173)",
+      "Bash(xargs kill:*)",
+      "Bash(npm list:*)",
+      "Bash(npm test:*)",
+      "Bash(cat)",
+      "Bash(node /tmp/check_stores.js)",
+      "Bash(node /tmp/check_tests.js)",
+      "Bash(node /tmp/final_check.js)",
+      "Bash(grep return {:*)",
+      "Bash(npx vitest:*)"
     ]
   }
 }
