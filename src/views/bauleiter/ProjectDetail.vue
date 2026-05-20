@@ -1,7 +1,7 @@
 <template>
-  <div>ProjectDetail Stub</div>
+  <BaustellenDetailView />
 </template>
 
 <script setup lang="ts">
-// Stub component - implemented in Task 11
+import BaustellenDetailView from '../sachbearbeiter/BaustellenDetailView.vue'
 </script>
