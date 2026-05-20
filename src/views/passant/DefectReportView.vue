@@ -1,7 +1,7 @@
 <template>
-  <div style="position: relative; height: calc(100vh - 120px)">
+  <div class="dr-container">
     <!-- Map fills background -->
-    <div style="position: absolute; inset: 0">
+    <div class="dr-map">
       <l-map
         :zoom="13"
         :center="[48.3974, 10.001]"
@@ -25,51 +25,39 @@
             <strong>{{ m.kategorie }}</strong><br />{{ m.beschreibung }}<br />Status: {{ m.status }}
           </l-popup>
         </l-circle-marker>
-        <!-- Selected position marker -->
         <l-circle-marker
-          v-if="selectedLat"
+          v-if="selectedLat !== 0"
           :lat-lng="[selectedLat, selectedLng]"
-          :radius="10"
-          color="#1565C0"
-          fill-color="#1565C0"
-          :fill-opacity="0.6"
+          :radius="11"
+          color="#2563EB"
+          fill-color="#2563EB"
+          :fill-opacity="0.5"
+          :weight="2"
         />
       </l-map>
     </div>
 
+    <!-- Click hint (shown when form is open but no position set) -->
+    <div v-if="showForm && selectedLat === 0" class="dr-hint">
+      <v-icon size="14" color="white">mdi-cursor-pointer</v-icon>
+      Klicke auf die Karte um eine Position zu wählen
+    </div>
+
     <!-- FAB -->
-    <v-btn
-      v-if="!showForm"
-      color="primary"
-      icon="mdi-plus"
-      size="large"
-      style="position: absolute; bottom: 24px; right: 24px; z-index: 1000"
-      elevation="4"
-      @click="showForm = true"
-    />
+    <button v-if="!showForm" class="dr-fab" @click="showForm = true">
+      <v-icon size="20" color="white">mdi-plus</v-icon>
+      <span>Mangel melden</span>
+    </button>
 
     <!-- Form panel -->
-    <div
-      v-if="showForm"
-      style="position: absolute; bottom: 24px; right: 24px; z-index: 1000"
-    >
+    <div v-if="showForm" class="dr-form-wrap">
       <DefectForm
         :lat="selectedLat"
         :lng="selectedLng"
         @submit="onSubmit"
-        @cancel="showForm = false"
+        @cancel="onCancel"
       />
     </div>
-
-    <!-- Hint when form open but no position selected -->
-    <v-chip
-      v-if="showForm && !selectedLat"
-      color="primary"
-      style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); z-index: 1000"
-    >
-      <v-icon start>mdi-cursor-pointer</v-icon>
-      Klicke auf die Karte für die Position
-    </v-chip>
   </div>
 </template>
 
@@ -101,12 +89,83 @@ function onSubmit(data: { kategorie: string; beschreibung: string; lat: number; 
     lng: data.lng,
     erstelltAm: new Date().toISOString().split('T')[0],
   })
+  onCancel()
+}
+
+function onCancel() {
   showForm.value = false
   selectedLat.value = 0
   selectedLng.value = 0
 }
 
 function markerColor(status: MaengelStatus) {
-  return { offen: '#D32F2F', in_bearbeitung: '#F57F17', erledigt: '#2E7D32' }[status]
+  return { offen: '#F59E0B', in_bearbeitung: '#3B82F6', erledigt: '#22C55E' }[status]
 }
 </script>
+
+<style scoped>
+.dr-container {
+  position: relative;
+  height: calc(100vh - 108px);
+}
+
+.dr-map {
+  position: absolute;
+  inset: 0;
+}
+
+.dr-hint {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(8, 18, 43, 0.82);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 40px;
+  border: 1px solid rgba(99, 179, 237, 0.2);
+  white-space: nowrap;
+}
+
+.dr-fab {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2563EB;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 40px;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+.dr-fab:hover {
+  background: #1D4ED8;
+  box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
+  transform: translateY(-1px);
+}
+.dr-fab:active { transform: translateY(0); }
+
+.dr-form-wrap {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+}
+</style>

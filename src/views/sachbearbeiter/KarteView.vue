@@ -1,18 +1,13 @@
 <template>
-  <div class="d-flex" style="height: calc(100vh - 120px)">
-    <!-- Sidebar -->
-    <div class="pa-2" style="overflow-y: auto">
-      <SidebarFilters
-        ref="sidebarRef"
-        :baustellen="baustellenStore.baustellen"
-        :maengel="maengelStore.maengel"
-        @focus-baustelle="focusBaustelle"
-        @focus-mangel="focusMangel"
-      />
-    </div>
-
-    <!-- Map -->
-    <div class="flex-grow-1">
+  <div class="kv-container">
+    <SidebarFilters
+      ref="sidebarRef"
+      :baustellen="baustellenStore.baustellen"
+      :maengel="maengelStore.maengel"
+      @focus-baustelle="focusBaustelle"
+      @focus-mangel="focusMangel"
+    />
+    <div class="kv-map">
       <MapView
         :baustellen="visibleBaustellen"
         :maengel="visibleMaengel"
@@ -57,3 +52,15 @@ function focusMangel(m: Mangel) {
   mapZoom.value = 17
 }
 </script>
+
+<style scoped>
+.kv-container {
+  display: flex;
+  height: calc(100vh - 108px);
+  overflow: hidden;
+}
+
+.kv-map {
+  flex: 1;
+}
+</style>

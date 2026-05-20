@@ -1,56 +1,91 @@
 <template>
-  <v-container fluid class="pa-4" v-if="baustelle">
-    <!-- Header -->
-    <v-row align="center" class="mb-2">
-      <v-col>
-        <div class="d-flex align-center ga-3 flex-wrap">
-          <v-btn icon="mdi-arrow-left" variant="text" @click="router.back()" />
+  <div v-if="baustelle" class="bv-view">
+    <!-- Page Header -->
+    <div class="bv-page-header">
+      <button class="bv-back-btn" @click="router.back()">
+        <v-icon size="16">mdi-arrow-left</v-icon>
+        Zurück
+      </button>
+      <div class="bv-header-body">
+        <div class="bv-header-main">
           <div>
-            <h2 class="text-h5 font-weight-bold">{{ baustelle.name }}</h2>
-            <span class="text-body-2 text-medium-emphasis">{{ baustelle.adresse }} · ID: {{ baustelle.id }}</span>
+            <h1 class="bp-heading bv-title">{{ baustelle.name }}</h1>
+            <div class="bv-meta">
+              <span class="bp-mono">{{ baustelle.id }}</span>
+              <span class="bv-dot-sep">·</span>
+              <v-icon size="12" color="#94A3B8">mdi-map-marker-outline</v-icon>
+              {{ baustelle.adresse }}
+            </div>
           </div>
-          <v-chip :color="statusColor(baustelle.status)" label class="ml-2">
-            {{ statusLabel(baustelle.status) }}
-          </v-chip>
-          <!-- SB: change status -->
-          <v-select
-            v-if="isSachbearbeiter"
-            v-model="selectedStatus"
-            :items="statusOptions"
-            density="compact"
-            variant="outlined"
-            hide-details
-            style="max-width: 180px"
-            @update:model-value="updateStatus"
-          />
+          <div class="bv-header-actions">
+            <span class="bp-status">
+              <span class="bp-dot" :class="`bp-dot--${baustelle.status}`" />
+              {{ statusLabel(baustelle.status) }}
+            </span>
+            <v-select
+              v-if="isSachbearbeiter"
+              v-model="selectedStatus"
+              :items="statusOptions"
+              density="compact"
+              variant="outlined"
+              hide-details
+              class="bv-status-select"
+              @update:model-value="updateStatus"
+            />
+          </div>
         </div>
-      </v-col>
-    </v-row>
+      </div>
+    </div>
 
-    <!-- Tabs -->
-    <v-tabs v-model="activeTab" color="primary">
-      <v-tab value="uebersicht">Übersicht</v-tab>
-      <v-tab value="maengel">Mängel</v-tab>
-      <v-tab value="dokumente">Dokumente & Bilder</v-tab>
-    </v-tabs>
-    <v-divider />
+    <!-- Sub-tabs -->
+    <div class="bv-tabs-wrap">
+      <v-tabs v-model="activeTab" color="primary" height="42" class="bv-tabs">
+        <v-tab value="uebersicht" class="bv-tab">
+          <v-icon size="14" class="mr-1">mdi-view-dashboard-outline</v-icon>
+          Übersicht
+        </v-tab>
+        <v-tab value="maengel" class="bv-tab">
+          <v-icon size="14" class="mr-1">mdi-alert-circle-outline</v-icon>
+          Mängel
+          <span class="bv-tab-badge">{{ maengelForBaustelle.length }}</span>
+        </v-tab>
+        <v-tab value="dokumente" class="bv-tab">
+          <v-icon size="14" class="mr-1">mdi-folder-outline</v-icon>
+          Dokumente & Bilder
+        </v-tab>
+      </v-tabs>
+      <div class="bv-tabs-line" />
+    </div>
 
-    <v-window v-model="activeTab" class="mt-4">
-      <!-- Tab: Übersicht -->
-      <v-window-item value="uebersicht">
-        <v-row>
-          <v-col cols="12" md="6">
-            <v-card variant="outlined" class="pa-4">
-              <v-list density="compact">
-                <v-list-item title="Priorität" :subtitle="baustelle.prioritaet" prepend-icon="mdi-flag" />
-                <v-list-item title="Zeitraum" :subtitle="`${baustelle.startDatum} – ${baustelle.endDatum}`" prepend-icon="mdi-calendar" />
-                <v-list-item title="Bauleiter ID" :subtitle="baustelle.bauleiterId" prepend-icon="mdi-hard-hat" />
-                <v-list-item title="Offene Mängel" :subtitle="String(baustelle.offenerMaengelCount)" prepend-icon="mdi-alert-circle" />
-              </v-list>
-            </v-card>
-          </v-col>
-          <v-col cols="12" md="6">
-            <div style="height: 250px">
+    <div class="bv-content">
+      <v-window v-model="activeTab">
+        <!-- Tab: Übersicht -->
+        <v-window-item value="uebersicht">
+          <div class="bv-overview-grid">
+            <div class="bv-data-card">
+              <div class="bp-section-header">
+                <span class="bp-section-title">Stammdaten</span>
+              </div>
+              <div class="bv-data-list">
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Priorität</span>
+                  <span class="bp-prio" :class="`bp-prio--${baustelle.prioritaet}`">{{ baustelle.prioritaet }}</span>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Zeitraum</span>
+                  <span class="bv-data-value bp-mono">{{ baustelle.startDatum }} – {{ baustelle.endDatum }}</span>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Bauleiter ID</span>
+                  <span class="bv-data-value bp-mono">{{ baustelle.bauleiterId }}</span>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Offene Mängel</span>
+                  <span class="bv-maengel-val">{{ baustelle.offenerMaengelCount }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="bv-map-card">
               <MapView
                 :baustellen="[baustelle]"
                 :maengel="[]"
@@ -58,124 +93,164 @@
                 :zoom="15"
               />
             </div>
-          </v-col>
-        </v-row>
-        <!-- Timeline -->
-        <v-timeline density="compact" class="mt-4" side="end">
-          <v-timeline-item dot-color="success" size="small">
-            <div class="text-body-2">Baustelle eröffnet – {{ baustelle.startDatum }}</div>
-          </v-timeline-item>
-          <v-timeline-item dot-color="warning" size="small">
-            <div class="text-body-2">Erster Mangel gemeldet – {{ firstMangelDate }}</div>
-          </v-timeline-item>
-          <v-timeline-item dot-color="info" size="small">
-            <div class="text-body-2">Status: {{ statusLabel(baustelle.status) }}</div>
-          </v-timeline-item>
-        </v-timeline>
-      </v-window-item>
+          </div>
 
-      <!-- Tab: Mängel -->
-      <v-window-item value="maengel">
-        <v-data-table
-          :headers="maengelHeaders"
-          :items="maengelForBaustelle"
-          item-value="id"
-        >
-          <template #item.status="{ item }">
-            <v-select
-              v-if="isSachbearbeiter"
-              :model-value="item.status"
-              :items="maengelStatusOptions"
-              density="compact"
-              variant="outlined"
-              hide-details
-              style="max-width: 160px"
-              @update:model-value="(v: any) => maengelStore.updateStatus(item.id, v)"
-            />
-            <v-chip v-else :color="maengelStatusColor(item.status)" size="small" label>
-              {{ item.status }}
-            </v-chip>
-          </template>
-        </v-data-table>
-      </v-window-item>
-
-      <!-- Tab: Dokumente & Bilder -->
-      <v-window-item value="dokumente">
-        <v-row>
-          <!-- Dokumente -->
-          <v-col cols="12" md="6">
-            <div class="d-flex align-center mb-2">
-              <h3 class="text-subtitle-1 font-weight-bold">Dokumente</h3>
-              <v-spacer />
-              <v-btn
-                v-if="isBauleiter"
-                size="small"
-                prepend-icon="mdi-upload"
-                @click="uploadDokDialog = true"
-              >
-                Hochladen
-              </v-btn>
+          <!-- Timeline -->
+          <div class="bv-timeline-card">
+            <div class="bp-section-title mb-3">Verlauf</div>
+            <div class="bv-timeline">
+              <div class="bv-tl-item">
+                <div class="bv-tl-dot bv-tl-dot--green" />
+                <div class="bv-tl-line" />
+                <div class="bv-tl-body">
+                  <span class="bv-tl-title">Baustelle eröffnet</span>
+                  <span class="bv-tl-date bp-mono">{{ baustelle.startDatum }}</span>
+                </div>
+              </div>
+              <div class="bv-tl-item">
+                <div class="bv-tl-dot bv-tl-dot--amber" />
+                <div class="bv-tl-line" />
+                <div class="bv-tl-body">
+                  <span class="bv-tl-title">Erster Mangel gemeldet</span>
+                  <span class="bv-tl-date bp-mono">{{ firstMangelDate }}</span>
+                </div>
+              </div>
+              <div class="bv-tl-item">
+                <div class="bv-tl-dot bv-tl-dot--blue" />
+                <div class="bv-tl-body">
+                  <span class="bv-tl-title">Aktueller Status: {{ statusLabel(baustelle.status) }}</span>
+                </div>
+              </div>
             </div>
-            <v-list lines="two" variant="outlined" rounded>
-              <v-list-item
-                v-for="dok in dokumenteForBaustelle"
-                :key="dok.id"
-                :title="dok.titel"
-                :subtitle="`${dok.typ.toUpperCase()} · ${dok.hochgeladenAm} · von ${dok.hochgeladenVon}`"
-                :prepend-icon="typIcon(dok.typ)"
-              />
-              <v-list-item v-if="dokumenteForBaustelle.length === 0" title="Keine Dokumente vorhanden" />
-            </v-list>
-          </v-col>
+          </div>
+        </v-window-item>
 
-          <!-- Bilder -->
-          <v-col cols="12" md="6">
-            <div class="d-flex align-center mb-2">
-              <h3 class="text-subtitle-1 font-weight-bold">Bilder</h3>
-              <v-spacer />
-              <v-btn
-                v-if="isBauleiter"
-                size="small"
-                prepend-icon="mdi-camera"
-                @click="addDummyBild"
-              >
-                Foto hinzufügen
-              </v-btn>
+        <!-- Tab: Mängel -->
+        <v-window-item value="maengel">
+          <div class="bv-section-wrap">
+            <v-data-table
+              :headers="maengelHeaders"
+              :items="maengelForBaustelle"
+              item-value="id"
+              hover
+            >
+              <template #item.kategorie="{ item }">
+                <span class="bp-mono" style="font-size:10.5px;color:#64748B">{{ item.kategorie }}</span>
+              </template>
+              <template #item.status="{ item }">
+                <div v-if="isSachbearbeiter" class="bv-status-cell">
+                  <span class="bp-status">
+                    <span class="bp-dot" :class="`bp-dot--${item.status}`" />
+                  </span>
+                  <v-select
+                    :model-value="item.status"
+                    :items="maengelStatusOptions"
+                    density="compact"
+                    variant="outlined"
+                    hide-details
+                    style="max-width:150px"
+                    @update:model-value="(v: any) => maengelStore.updateStatus(item.id, v)"
+                  />
+                </div>
+                <span v-else class="bp-status">
+                  <span class="bp-dot" :class="`bp-dot--${item.status}`" />
+                  {{ item.status }}
+                </span>
+              </template>
+              <template #item.erstelltAm="{ item }">
+                <span class="bp-mono" style="font-size:11px;color:#64748B">{{ item.erstelltAm }}</span>
+              </template>
+            </v-data-table>
+          </div>
+        </v-window-item>
+
+        <!-- Tab: Dokumente & Bilder -->
+        <v-window-item value="dokumente">
+          <div class="bv-dok-grid">
+            <!-- Dokumente -->
+            <div class="bv-dok-col">
+              <div class="bp-section-header">
+                <span class="bp-section-title">Dokumente</span>
+                <v-btn
+                  v-if="isBauleiter"
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                  prepend-icon="mdi-upload"
+                  @click="uploadDokDialog = true"
+                >
+                  Hochladen
+                </v-btn>
+              </div>
+              <div class="bv-dok-list">
+                <div
+                  v-for="dok in dokumenteForBaustelle"
+                  :key="dok.id"
+                  class="bv-dok-item"
+                >
+                  <div class="bv-dok-icon">
+                    <v-icon size="18" :color="typColor(dok.typ)">{{ typIcon(dok.typ) }}</v-icon>
+                  </div>
+                  <div class="bv-dok-info">
+                    <span class="bv-dok-title">{{ dok.titel }}</span>
+                    <span class="bv-dok-meta bp-mono">{{ dok.typ.toUpperCase() }} · {{ dok.hochgeladenAm }} · {{ dok.hochgeladenVon }}</span>
+                  </div>
+                </div>
+                <div v-if="dokumenteForBaustelle.length === 0" class="bv-empty-state">
+                  <v-icon size="32" color="#CBD5E1">mdi-file-outline</v-icon>
+                  <span class="bp-mono bv-empty-text">Keine Dokumente</span>
+                </div>
+              </div>
             </div>
-            <v-row dense>
-              <v-col v-for="bild in bilderForBaustelle" :key="bild.id" cols="6">
-                <v-img :src="bild.url" :alt="bild.beschreibung" aspect-ratio="1.33" cover rounded="lg" />
-                <div class="text-caption mt-1">{{ bild.beschreibung }}</div>
-              </v-col>
-              <v-col v-if="bilderForBaustelle.length === 0" cols="12">
-                <span class="text-body-2 text-medium-emphasis">Keine Bilder vorhanden</span>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-window-item>
-    </v-window>
+
+            <!-- Bilder -->
+            <div class="bv-dok-col">
+              <div class="bp-section-header">
+                <span class="bp-section-title">Bilder</span>
+                <v-btn
+                  v-if="isBauleiter"
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                  prepend-icon="mdi-camera"
+                  @click="addDummyBild"
+                >
+                  Foto hinzufügen
+                </v-btn>
+              </div>
+              <div class="bv-img-grid">
+                <div v-for="bild in bilderForBaustelle" :key="bild.id" class="bv-img-wrap">
+                  <v-img :src="bild.url" :alt="bild.beschreibung" aspect-ratio="1.33" cover rounded="lg" />
+                  <span class="bv-img-caption bp-mono">{{ bild.beschreibung }}</span>
+                </div>
+                <div v-if="bilderForBaustelle.length === 0" class="bv-empty-state">
+                  <v-icon size="32" color="#CBD5E1">mdi-image-outline</v-icon>
+                  <span class="bp-mono bv-empty-text">Keine Bilder</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </v-window-item>
+      </v-window>
+    </div>
 
     <!-- Upload Dok Dialog -->
-    <v-dialog v-model="uploadDokDialog" max-width="420">
-      <v-card>
-        <v-card-title>Dokument hochladen</v-card-title>
-        <v-card-text>
-          <v-text-field v-model="newDokTitel" label="Titel" variant="outlined" density="compact" class="mb-3" />
-          <v-select v-model="newDokTyp" :items="['pdf', 'protokoll', 'sonstiges']" label="Typ" variant="outlined" density="compact" />
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn @click="uploadDokDialog = false">Abbrechen</v-btn>
+    <v-dialog v-model="uploadDokDialog" max-width="400">
+      <v-card class="bp-card pa-6">
+        <div class="bp-section-title mb-4">Dokument hochladen</div>
+        <v-text-field v-model="newDokTitel" label="Titel" variant="outlined" density="compact" class="mb-3" />
+        <v-select v-model="newDokTyp" :items="['pdf', 'protokoll', 'sonstiges']" label="Typ" variant="outlined" density="compact" />
+        <div class="d-flex gap-2 justify-end mt-4">
+          <v-btn variant="text" @click="uploadDokDialog = false">Abbrechen</v-btn>
           <v-btn color="primary" @click="submitDokument">Hochladen</v-btn>
-        </v-card-actions>
+        </div>
       </v-card>
     </v-dialog>
-  </v-container>
+  </div>
 
-  <v-container v-else>
-    <v-alert type="error">Baustelle nicht gefunden.</v-alert>
-  </v-container>
+  <div v-else class="pa-6">
+    <v-alert type="error" variant="tonal">Baustelle nicht gefunden.</v-alert>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -229,17 +304,14 @@ const maengelHeaders = [
 function updateStatus(v: BaustellenStatus) {
   baustellenStore.updateStatus(id, v)
 }
-function statusColor(s: BaustellenStatus) {
-  return { offen: 'warning', in_pruefung: 'info', abgeschlossen: 'success' }[s]
-}
 function statusLabel(s: BaustellenStatus) {
   return { offen: 'Offen', in_pruefung: 'In Prüfung', abgeschlossen: 'Abgeschlossen' }[s]
 }
-function maengelStatusColor(s: string) {
-  return { offen: 'error', in_bearbeitung: 'warning', erledigt: 'success' }[s] ?? 'grey'
-}
 function typIcon(typ: string) {
   return { pdf: 'mdi-file-pdf-box', bild: 'mdi-image', protokoll: 'mdi-clipboard-text', sonstiges: 'mdi-file' }[typ] ?? 'mdi-file'
+}
+function typColor(typ: string) {
+  return { pdf: '#EF4444', bild: '#8B5CF6', protokoll: '#F59E0B', sonstiges: '#94A3B8' }[typ] ?? '#94A3B8'
 }
 
 function submitDokument() {
@@ -269,3 +341,336 @@ function addDummyBild() {
   baustellenStore.addBild(bild)
 }
 </script>
+
+<style scoped>
+.bv-view {
+  background: #F8FAFC;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bv-page-header {
+  padding: 16px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bv-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #94A3B8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+.bv-back-btn:hover { color: #2563EB; }
+
+.bv-header-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.bv-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: -0.02em;
+}
+
+.bv-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 4px;
+}
+
+.bv-dot-sep {
+  color: #CBD5E1;
+}
+
+.bv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.bv-status-select {
+  width: 170px;
+}
+
+.bv-tabs-wrap {
+  margin-top: 12px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.bv-tabs {
+  padding: 0 24px;
+}
+
+.bv-tab {
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 13px !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bv-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: #F1F5F9;
+  color: #64748B;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.bv-tabs-line {
+  height: 1px;
+  background: #E2E8F0;
+}
+
+.bv-content {
+  padding: 20px 24px 24px;
+  flex: 1;
+}
+
+.bv-overview-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.bv-data-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.bv-data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bv-data-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+.bv-data-row:last-child { border-bottom: none; }
+
+.bv-data-label {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94A3B8;
+}
+
+.bv-data-value {
+  font-size: 11.5px;
+  color: #0F172A;
+}
+
+.bv-maengel-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #EF4444;
+}
+
+.bv-map-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.bv-timeline-card {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.bv-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bv-tl-item {
+  display: grid;
+  grid-template-columns: 16px 2px 1fr;
+  gap: 0 12px;
+  align-items: start;
+}
+
+.bv-tl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.bv-tl-dot--green { background: #22C55E; box-shadow: 0 0 5px rgba(34,197,94,0.5); }
+.bv-tl-dot--amber { background: #F59E0B; box-shadow: 0 0 5px rgba(245,158,11,0.5); }
+.bv-tl-dot--blue  { background: #3B82F6; box-shadow: 0 0 5px rgba(59,130,246,0.5); }
+
+.bv-tl-line {
+  width: 2px;
+  background: #E2E8F0;
+  min-height: 28px;
+  justify-self: center;
+}
+
+.bv-tl-body {
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bv-tl-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0F172A;
+}
+
+.bv-tl-date {
+  font-size: 10px;
+  color: #94A3B8;
+}
+
+.bv-section-wrap {
+  /* table already styled via global bp-data-table */
+}
+
+.bv-status-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bv-dok-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.bv-dok-col {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.bv-dok-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bv-dok-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #F1F5F9;
+  border-radius: 8px;
+  background: #FAFAFA;
+}
+
+.bv-dok-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #F1F5F9;
+  flex-shrink: 0;
+}
+
+.bv-dok-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bv-dok-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0F172A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bv-dok-meta {
+  font-size: 9.5px;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bv-img-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.bv-img-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bv-img-caption {
+  font-size: 9px;
+  color: #94A3B8;
+  text-align: center;
+}
+
+.bv-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+}
+
+.bv-empty-text {
+  font-size: 10px;
+  color: #CBD5E1;
+  letter-spacing: 0.06em;
+}
+</style>
