@@ -273,7 +273,7 @@ const baustelle = computed(() => baustellenStore.baustellen.find(b => b.id === i
 const isSachbearbeiter = computed(() => roleStore.currentRole === 'sachbearbeiter')
 const isBauleiter = computed(() => roleStore.currentRole === 'bauleiter')
 
-const activeTab = ref('uebersicht')
+const activeTab = ref((route.query.tab as string) || 'uebersicht')
 const uploadDokDialog = ref(false)
 const newDokTitel = ref('')
 const newDokTyp = ref<'pdf' | 'protokoll' | 'sonstiges'>('pdf')

@@ -14,6 +14,7 @@
         :center="mapCenter"
         :zoom="mapZoom"
         @baustelle-detail="(id: string) => router.push(`/sb/baustellen/${id}`)"
+        @mangel-detail="(m: Mangel) => router.push(`/sb/baustellen/${m.baustellenId}?tab=maengel`)"
       />
     </div>
   </div>
@@ -27,6 +28,7 @@ import { useMaengelStore } from '../../stores/maengelStore'
 import MapView from '../../components/MapView.vue'
 import SidebarFilters from '../../components/SidebarFilters.vue'
 import type { Baustelle, Mangel } from '../../types/types'
+// Mangel type imported for template usage
 
 const router = useRouter()
 const baustellenStore = useBaustellenStore()

@@ -54,20 +54,19 @@
         :items="filteredMaengel"
         item-value="id"
         hover
+        @click:row="(_: any, { item }: any) => goToDetail(item.baustellenId)"
       >
-        <template #item.kategorie="{ item }">
-          <span class="bp-mono" style="font-size:10.5px;letter-spacing:0.04em;color:#64748B">{{ item.kategorie }}</span>
-        </template>
         <template #item.beschreibung="{ item }">
-          <span class="ml-desc">{{ item.beschreibung }}</span>
+          <div class="ml-desc-cell">
+            <span class="ml-item-name">{{ item.beschreibung }}</span>
+            <span class="bp-mono ml-item-id">{{ item.kategorie }}</span>
+          </div>
         </template>
         <template #item.baustellenId="{ item }">
-          <button class="ml-link-btn" @click="goToDetail(item.baustellenId)">
-            {{ baustelleName(item.baustellenId) }}
-          </button>
+          <span class="ml-baustelle-name">{{ baustelleName(item.baustellenId) }}</span>
         </template>
         <template #item.status="{ item }">
-          <div class="ml-status-cell">
+          <div class="ml-status-cell" @click.stop>
             <span class="bp-status">
               <span class="bp-dot" :class="`bp-dot--${item.status}`" />
               {{ statusLabel(item.status) }}
@@ -76,11 +75,15 @@
               :model-value="item.status"
               :items="statusOptions"
               density="compact"
-              variant="outlined"
+              variant="plain"
               hide-details
               class="ml-status-select"
               @update:model-value="(v: any) => maengelStore.updateStatus(item.id, v)"
-            />
+            >
+              <template #prepend-inner>
+                <v-icon size="13" color="#94A3B8">mdi-pencil</v-icon>
+              </template>
+            </v-select>
           </div>
         </template>
         <template #item.erstelltAm="{ item }">
@@ -116,10 +119,9 @@ const kategorien = computed(() =>
 )
 
 const headers = [
-  { title: 'Kategorie', key: 'kategorie' },
-  { title: 'Beschreibung', key: 'beschreibung' },
-  { title: 'Baustelle', key: 'baustellenId' },
-  { title: 'Status', key: 'status' },
+  { title: 'Mangel', key: 'beschreibung', sortable: false },
+  { title: 'Baustelle', key: 'baustellenId', sortable: true },
+  { title: 'Status', key: 'status', sortable: true },
   { title: 'Gemeldet am', key: 'erstelltAm', sortable: true },
 ]
 
@@ -140,7 +142,7 @@ function baustelleName(id: string) {
 }
 
 function goToDetail(baustellenId: string) {
-  router.push(`/sb/baustellen/${baustellenId}`)
+  router.push(`/sb/baustellen/${baustellenId}?tab=maengel`)
 }
 
 function statusLabel(s: MaengelStatus) {
@@ -183,41 +185,48 @@ function statusLabel(s: MaengelStatus) {
   flex: 1;
 }
 
-.ml-desc {
-  font-size: 13px;
-  color: #0F172A;
-  max-width: 260px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
+/* Matches BaustellenListView name cell pattern */
+.ml-desc-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.ml-link-btn {
+.ml-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.ml-item-id {
+  font-size: 9.5px;
+  color: #94A3B8;
+  letter-spacing: 0.04em;
+}
+
+.ml-baustelle-name {
   font-family: 'DM Sans', sans-serif;
   font-size: 12.5px;
-  font-weight: 600;
+  font-weight: 500;
   color: #2563EB;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.ml-link-btn:hover {
-  color: #1D4ED8;
-  text-decoration: underline;
 }
 
+/* Status cell: dot+label on left, small edit select on right */
 .ml-status-cell {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+  min-width: 220px;
 }
 
 .ml-status-select {
-  max-width: 150px;
-  font-size: 12px;
+  width: 110px;
+  font-size: 11px !important;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.ml-status-cell:hover .ml-status-select {
+  opacity: 1;
 }
 </style>
