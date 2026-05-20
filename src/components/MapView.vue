@@ -6,14 +6,14 @@
       :center="center"
       :use-global-leaflet="false"
     >
-      <!-- CartoDB Dark Matter — no API key needed -->
+      <!-- CartoDB Positron — light grey, minimal, no API key needed -->
       <l-tile-layer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         :max-zoom="19"
       />
 
-      <!-- Baustellen markers (circle with border ring) -->
+      <!-- Baustellen markers -->
       <l-circle-marker
         v-for="b in baustellen"
         :key="b.id"
@@ -39,7 +39,7 @@
         </l-popup>
       </l-circle-marker>
 
-      <!-- Mängel markers (smaller, diamond-ish via smaller radius + distinct colors) -->
+      <!-- Mängel markers -->
       <l-circle-marker
         v-for="m in maengel"
         :key="m.id"
@@ -93,19 +93,15 @@ const emit = defineEmits<{
   mapClick: [latlng: { lat: number; lng: number }]
 }>()
 
-// Baustellen: larger ring marker — neon accent on dark map
 function baustelleFillColor(status: BaustellenStatus) {
-  return { offen: '#F59E0B', in_pruefung: '#A78BFA', abgeschlossen: '#34D399' }[status]
+  return { offen: '#F59E0B', in_pruefung: '#8B5CF6', abgeschlossen: '#22C55E' }[status]
 }
 function baustelleRingColor(status: BaustellenStatus) {
-  return { offen: '#FDE68A', in_pruefung: '#DDD6FE', abgeschlossen: '#6EE7B7' }[status]
+  return { offen: '#D97706', in_pruefung: '#7C3AED', abgeschlossen: '#16A34A' }[status]
 }
-
-// Mängel: smaller solid dot
 function maengelColor(status: MaengelStatus) {
-  return { offen: '#FB923C', in_bearbeitung: '#60A5FA', erledigt: '#4ADE80' }[status]
+  return { offen: '#EF4444', in_bearbeitung: '#3B82F6', erledigt: '#22C55E' }[status]
 }
-
 function maengelStatusLabel(status: MaengelStatus) {
   return { offen: 'Offen', in_bearbeitung: 'In Bearbeitung', erledigt: 'Erledigt' }[status]
 }
@@ -115,31 +111,36 @@ function baustelleStatusLabel(status: BaustellenStatus) {
 </script>
 
 <style>
-/* ── Leaflet UI overrides for dark theme ── */
+/* ── Leaflet UI: match site style ── */
 .leaflet-control-zoom a {
-  background: #1E293B !important;
-  color: #94A3B8 !important;
-  border-color: #334155 !important;
+  font-family: 'DM Sans', sans-serif !important;
+  background: #ffffff !important;
+  color: #64748B !important;
+  border-color: #E2E8F0 !important;
+  font-weight: 600 !important;
 }
 .leaflet-control-zoom a:hover {
-  background: #334155 !important;
-  color: #F1F5F9 !important;
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
 }
 .leaflet-control-attribution {
-  background: rgba(15, 23, 42, 0.7) !important;
-  color: #475569 !important;
+  font-family: 'JetBrains Mono', monospace !important;
   font-size: 9px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #94A3B8 !important;
+  border-radius: 6px 0 0 0 !important;
+  padding: 2px 6px !important;
 }
 .leaflet-control-attribution a {
   color: #64748B !important;
 }
 
-/* ── Dark popup ── */
+/* ── Popup shell ── */
 .leaflet-popup-content-wrapper {
-  background: #0F172A !important;
-  border: 1px solid #1E293B !important;
+  background: #ffffff !important;
+  border: 1px solid #E2E8F0 !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1) !important;
   padding: 0 !important;
 }
 .leaflet-popup-content {
@@ -147,18 +148,21 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   width: auto !important;
 }
 .leaflet-popup-tip {
-  background: #0F172A !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
 }
 .leaflet-popup-close-button {
-  color: #475569 !important;
+  font-family: 'DM Sans', sans-serif !important;
+  color: #94A3B8 !important;
   top: 8px !important;
   right: 10px !important;
+  font-size: 16px !important;
 }
 .leaflet-popup-close-button:hover {
-  color: #94A3B8 !important;
+  color: #0F172A !important;
 }
 
-/* ── Popup content ── */
+/* ── Popup content — project fonts ── */
 .map-popup {
   font-family: 'DM Sans', sans-serif;
   min-width: 190px;
@@ -176,21 +180,24 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   margin-bottom: 8px;
 }
 .map-popup-tag--baustelle {
-  background: rgba(37, 99, 235, 0.2);
-  color: #93C5FD;
+  background: #EFF6FF;
+  color: #2563EB;
 }
 .map-popup-tag--mangel {
-  background: rgba(245, 158, 11, 0.2);
-  color: #FCD34D;
+  background: #FEF2F2;
+  color: #DC2626;
 }
 .map-popup-title {
-  font-size: 13px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
   font-weight: 700;
-  color: #F1F5F9;
+  color: #0F172A;
   margin-bottom: 3px;
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 .map-popup-addr {
+  font-family: 'DM Sans', sans-serif;
   font-size: 11.5px;
   color: #64748B;
   margin-bottom: 8px;
@@ -212,20 +219,21 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: #64748B;
+  letter-spacing: 0.03em;
 }
 .map-popup-link {
   display: block;
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
-  color: #63B3ED;
+  color: #2563EB;
   text-decoration: none;
-  border-top: 1px solid #1E293B;
+  border-top: 1px solid #F1F5F9;
   padding-top: 8px;
   margin-top: 2px;
   transition: color 0.12s;
 }
 .map-popup-link:hover {
-  color: #93C5FD;
+  color: #1D4ED8;
 }
 </style>
