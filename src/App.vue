@@ -1,14 +1,12 @@
 <template>
   <v-app>
-    <AppHeader />
     <v-main>
-      <Tabbar />
+      <PillNav />
       <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import AppHeader from './components/AppHeader.vue'
-import Tabbar from './components/Tabbar.vue'
+import PillNav from './components/PillNav.vue'
 </script>

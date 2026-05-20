@@ -31,7 +31,7 @@ export interface Dokument {
   id: string
   baustellenId: string
   titel: string
-  typ: 'pdf' | 'bild' | 'protokoll' | 'sonstiges'
+  typ: 'antrag' | 'vra' | 'pdf' | 'bild' | 'protokoll' | 'sonstiges'
   hochgeladenVon: 'bauleiter' | 'sachbearbeiter'
   hochgeladenAm: string
 }

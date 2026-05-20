@@ -195,8 +195,25 @@ export const mockMaengel: Mangel[] = [
 ]
 
 export const mockDokumente: Dokument[] = [
+  // bs-1: Bahnhofsplatz Sanierung
   {
-    id: 'dok-1',
+    id: 'dok-bs1-antrag',
+    baustellenId: 'bs-1',
+    titel: 'Antrag auf Sondernutzung – Bahnhofsplatz',
+    typ: 'antrag',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-02-12',
+  },
+  {
+    id: 'dok-bs1-vra',
+    baustellenId: 'bs-1',
+    titel: 'Verkehrsrechtliche Anordnung – Bahnhofsplatz',
+    typ: 'vra',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-02-18',
+  },
+  {
+    id: 'dok-bs1-plan',
     baustellenId: 'bs-1',
     titel: 'Baustellenplan Bahnhofsplatz v2',
     typ: 'pdf',
@@ -204,36 +221,126 @@ export const mockDokumente: Dokument[] = [
     hochgeladenAm: '2026-03-05',
   },
   {
-    id: 'dok-2',
+    id: 'dok-bs1-protokoll',
     baustellenId: 'bs-1',
     titel: 'Besprechungsprotokoll 10.03.2026',
     typ: 'protokoll',
     hochgeladenVon: 'sachbearbeiter',
     hochgeladenAm: '2026-03-10',
   },
+
+  // bs-2: Schillerstraße Tiefbau
   {
-    id: 'dok-3',
+    id: 'dok-bs2-antrag',
+    baustellenId: 'bs-2',
+    titel: 'Antrag auf Sondernutzung – Schillerstraße',
+    typ: 'antrag',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-01-05',
+  },
+  {
+    id: 'dok-bs2-vra',
+    baustellenId: 'bs-2',
+    titel: 'Verkehrsrechtliche Anordnung – Schillerstraße',
+    typ: 'vra',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-01-10',
+  },
+  {
+    id: 'dok-bs2-gen',
     baustellenId: 'bs-2',
     titel: 'Genehmigung Tiefbau',
     typ: 'pdf',
     hochgeladenVon: 'sachbearbeiter',
     hochgeladenAm: '2026-01-20',
   },
+
+  // bs-3: Wileystraße Kanalsanierung
   {
-    id: 'dok-4',
+    id: 'dok-bs3-antrag',
+    baustellenId: 'bs-3',
+    titel: 'Antrag auf Sondernutzung – Wileystraße',
+    typ: 'antrag',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-01-28',
+  },
+  {
+    id: 'dok-bs3-vra',
+    baustellenId: 'bs-3',
+    titel: 'Verkehrsrechtliche Anordnung – Wileystraße',
+    typ: 'vra',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-02-03',
+  },
+  {
+    id: 'dok-bs3-plan',
     baustellenId: 'bs-3',
     titel: 'Kanalplan Wileystraße',
     typ: 'pdf',
     hochgeladenVon: 'bauleiter',
     hochgeladenAm: '2026-02-15',
   },
+
+  // bs-4: Ringstraße Asphaltierung
   {
-    id: 'dok-5',
+    id: 'dok-bs4-antrag',
+    baustellenId: 'bs-4',
+    titel: 'Antrag auf Sondernutzung – Ringstraße',
+    typ: 'antrag',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2025-09-15',
+  },
+  {
+    id: 'dok-bs4-vra',
+    baustellenId: 'bs-4',
+    titel: 'Verkehrsrechtliche Anordnung – Ringstraße',
+    typ: 'vra',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2025-09-22',
+  },
+
+  // bs-5: Industriestraße Brückensanierung
+  {
+    id: 'dok-bs5-antrag',
+    baustellenId: 'bs-5',
+    titel: 'Antrag auf Sondernutzung – Industriestraße',
+    typ: 'antrag',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-03-18',
+  },
+  {
+    id: 'dok-bs5-vra',
+    baustellenId: 'bs-5',
+    titel: 'Verkehrsrechtliche Anordnung – Industriestraße',
+    typ: 'vra',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-03-24',
+  },
+  {
+    id: 'dok-bs5-statik',
     baustellenId: 'bs-5',
     titel: 'Statikgutachten Brücke',
     typ: 'pdf',
     hochgeladenVon: 'bauleiter',
     hochgeladenAm: '2026-04-02',
+  },
+
+  // bs-6: Ludwigsplatz Pflasterung
+  {
+    id: 'dok-bs6-antrag',
+    baustellenId: 'bs-6',
+    titel: 'Antrag auf Sondernutzung – Ludwigsplatz',
+    typ: 'antrag',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-04-14',
+  },
+  {
+    id: 'dok-bs6-vra',
+    baustellenId: 'bs-6',
+    titel: 'Verkehrsrechtliche Anordnung – Ludwigsplatz',
+    typ: 'vra',
+    hochgeladenVon: 'sachbearbeiter',
+    hochgeladenAm: '2026-04-20',
   },
 ]
 

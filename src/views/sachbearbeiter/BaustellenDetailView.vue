@@ -188,12 +188,15 @@
                   :key="dok.id"
                   class="bv-dok-item"
                 >
-                  <div class="bv-dok-icon">
+                  <div class="bv-dok-icon" :style="{ background: typColor(dok.typ) + '18' }">
                     <v-icon size="18" :color="typColor(dok.typ)">{{ typIcon(dok.typ) }}</v-icon>
                   </div>
                   <div class="bv-dok-info">
                     <span class="bv-dok-title">{{ dok.titel }}</span>
-                    <span class="bv-dok-meta bp-mono">{{ dok.typ.toUpperCase() }} · {{ dok.hochgeladenAm }} · {{ dok.hochgeladenVon }}</span>
+                    <span class="bv-dok-meta bp-mono">
+                      <span class="bv-dok-type-badge" :style="{ color: typColor(dok.typ), background: typColor(dok.typ) + '15' }">{{ typLabel(dok.typ) }}</span>
+                      · {{ dok.hochgeladenAm }} · {{ dok.hochgeladenVon }}
+                    </span>
                   </div>
                 </div>
                 <div v-if="dokumenteForBaustelle.length === 0" class="bv-empty-state">
@@ -308,10 +311,34 @@ function statusLabel(s: BaustellenStatus) {
   return { offen: 'Offen', in_pruefung: 'In Prüfung', abgeschlossen: 'Abgeschlossen' }[s]
 }
 function typIcon(typ: string) {
-  return { pdf: 'mdi-file-pdf-box', bild: 'mdi-image', protokoll: 'mdi-clipboard-text', sonstiges: 'mdi-file' }[typ] ?? 'mdi-file'
+  return {
+    antrag: 'mdi-file-sign',
+    vra: 'mdi-traffic-light',
+    pdf: 'mdi-file-pdf-box',
+    bild: 'mdi-image',
+    protokoll: 'mdi-clipboard-text',
+    sonstiges: 'mdi-file',
+  }[typ] ?? 'mdi-file'
 }
 function typColor(typ: string) {
-  return { pdf: '#EF4444', bild: '#8B5CF6', protokoll: '#F59E0B', sonstiges: '#94A3B8' }[typ] ?? '#94A3B8'
+  return {
+    antrag: '#2563EB',
+    vra: '#8B5CF6',
+    pdf: '#EF4444',
+    bild: '#F59E0B',
+    protokoll: '#F59E0B',
+    sonstiges: '#94A3B8',
+  }[typ] ?? '#94A3B8'
+}
+function typLabel(typ: string) {
+  return {
+    antrag: 'ANTRAG',
+    vra: 'VRA',
+    pdf: 'PDF',
+    bild: 'BILD',
+    protokoll: 'PROTOKOLL',
+    sonstiges: 'SONST.',
+  }[typ] ?? typ.toUpperCase()
 }
 
 function submitDokument() {
@@ -636,10 +663,23 @@ function addDummyBild() {
 }
 
 .bv-dok-meta {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 9.5px;
   color: #94A3B8;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.bv-dok-type-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 1px 6px;
+  border-radius: 4px;
 }
 
 .bv-img-grid {

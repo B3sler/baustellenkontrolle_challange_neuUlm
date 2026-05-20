@@ -32,6 +32,10 @@ const router = createRouter({
       path: '/bl/projects/:id',
       component: () => import('../views/bauleiter/ProjectDetail.vue'),
     },
+    {
+      path: '/bl/anleitung',
+      component: () => import('../views/bauleiter/AnleitungView.vue'),
+    },
 
     // Passant
     {
@@ -45,6 +49,10 @@ const router = createRouter({
     {
       path: '/pa/karte',
       component: () => import('../views/passant/PassantKarteView.vue'),
+    },
+    {
+      path: '/pa/anleitung',
+      component: () => import('../views/passant/AnleitungView.vue'),
     },
 
     // 404 fallback

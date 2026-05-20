@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuBautUlm – Style A Varianten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Geist+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #070710;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      padding: 48px 28px 80px;
+      min-height: 100vh;
+    }
+
+    .page-eyebrow {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #3a3a5c;
+      margin-bottom: 10px;
+    }
+    .page-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .page-sub {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 56px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .col-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #2a2a44;
+      margin-bottom: 14px;
+    }
+    .col-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .col-desc {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       VARIATION A1 — VERCEL / STRIPE
+       Ultra-precise, max contrast, white dominant
+    ═══════════════════════════════════════════════════ */
+    .a1 {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #E2E6EE, 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .a1-bar {
+      background: #fff;
+      border-bottom: 1px solid #E2E6EE;
+      padding: 0 20px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .a1-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .a1-logo-mark {
+      width: 28px; height: 28px;
+      background: #0F44B8;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .a1-logo-mark svg { width: 14px; height: 14px; }
+    .a1-logo-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0A0F1E;
+      letter-spacing: -0.02em;
+    }
+    .a1-role-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #F4F6FA;
+      border: 1px solid #E2E6EE;
+      border-radius: 20px;
+      padding: 4px 12px 4px 8px;
+    }
+    .a1-role-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; }
+    .a1-role-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .a1-nav {
+      background: #fff;
+      border-bottom: 1px solid #E2E6EE;
+      padding: 0 20px;
+      display: flex;
+      gap: 2px;
+    }
+    .a1-nav-item {
+      padding: 10px 12px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #9CA3AF;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      position: relative;
+    }
+    .a1-nav-item.active {
+      color: #0F44B8;
+    }
+    .a1-nav-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 12px; right: 12px;
+      height: 2px;
+      background: #0F44B8;
+      border-radius: 2px 2px 0 0;
+    }
+    .a1-body { background: #F7F9FC; padding: 16px; }
+    .a1-kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .a1-kpi {
+      background: #fff;
+      border: 1px solid #E2E6EE;
+      border-radius: 10px;
+      padding: 12px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .a1-kpi::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+    }
+    .a1-kpi.blue::before { background: #0F44B8; }
+    .a1-kpi.red::before { background: #DC2626; }
+    .a1-kpi.green::before { background: #16A34A; }
+    .a1-kpi-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      color: #0A0F1E;
+    }
+    .a1-kpi-lbl {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+      margin-top: 4px;
+    }
+    .a1-table {
+      background: #fff;
+      border: 1px solid #E2E6EE;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .a1-thead {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      padding: 8px 14px;
+      border-bottom: 1px solid #E2E6EE;
+      background: #F7F9FC;
+    }
+    .a1-th {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #9CA3AF;
+    }
+    .a1-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      padding: 10px 14px;
+      border-bottom: 1px solid #F3F4F6;
+      align-items: center;
+      gap: 10px;
+    }
+    .a1-row:last-child { border-bottom: none; }
+    .a1-row:hover { background: #F7F9FC; }
+    .a1-row-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #111827;
+    }
+    .a1-row-sub {
+      font-size: 10.5px;
+      color: #9CA3AF;
+      font-weight: 400;
+    }
+    .a1-chip {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .a1-chip.warn { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE68A; }
+    .a1-chip.err { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+    .a1-chip.ok { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+    .a1-chip.info { background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
+    .a1-btn {
+      margin-top: 12px;
+      background: #0F44B8;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ════════════════════════════════════════════════════
+       VARIATION A2 — EDITORIAL / BLUEPRINT
+       Deep navy header, clinical white body, mono accents
+    ═══════════════════════════════════════════════════ */
+    .a2 {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #DCE3F0, 0 12px 40px rgba(10,20,60,0.12);
+    }
+    .a2-bar {
+      background: #08122B;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .a2-logo {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .a2-logo-accent {
+      font-family: 'Geist Mono', monospace;
+      font-size: 8px;
+      background: rgba(99,179,237,0.15);
+      border: 1px solid rgba(99,179,237,0.3);
+      color: #63B3ED;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .a2-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .a2-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563EB, #7C3AED);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .a2-username {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+    .a2-nav {
+      background: #0D1A38;
+      display: flex;
+      gap: 0;
+      padding: 0 20px;
+    }
+    .a2-nav-item {
+      padding: 11px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      border-bottom: 2px solid transparent;
+      letter-spacing: 0.01em;
+    }
+    .a2-nav-item.active {
+      color: #63B3ED;
+      border-bottom-color: #63B3ED;
+    }
+    .a2-body { background: #fff; padding: 18px; }
+    .a2-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .a2-section-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0A1628;
+      letter-spacing: -0.02em;
+    }
+    .a2-section-count {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: #94A3B8;
+    }
+    .a2-kpi-row {
+      display: flex;
+      gap: 1px;
+      background: #E2E8F0;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .a2-kpi {
+      flex: 1;
+      background: #fff;
+      padding: 12px 14px;
+    }
+    .a2-kpi-val {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #0A1628;
+      line-height: 1;
+    }
+    .a2-kpi-lbl {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94A3B8;
+      margin-top: 4px;
+    }
+    .a2-kpi-delta {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9px;
+      color: #DC2626;
+    }
+    .a2-list { border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden; }
+    .a2-list-head {
+      display: grid;
+      grid-template-columns: 1fr 80px 70px;
+      padding: 7px 14px;
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .a2-list-th {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #CBD5E1;
+    }
+    .a2-list-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 70px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #F1F5F9;
+      align-items: center;
+    }
+    .a2-list-row:last-child { border-bottom: none; }
+    .a2-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+    .a2-sub {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      color: #94A3B8;
+    }
+    .a2-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: #64748B;
+    }
+    .a2-status-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .a2-status-dot.offen { background: #F59E0B; box-shadow: 0 0 4px #F59E0B; }
+    .a2-status-dot.ok { background: #22C55E; box-shadow: 0 0 4px #22C55E; }
+    .a2-prio {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .a2-prio.hoch { color: #EF4444; }
+    .a2-prio.mittel { color: #94A3B8; }
+    .a2-btn {
+      margin-top: 13px;
+      background: #08122B;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+    }
+
+    /* ════════════════════════════════════════════════════
+       VARIATION A3 — CIVIC PREMIUM
+       White, bold typography, generous spacing, glassmorphism header
+    ═══════════════════════════════════════════════════ */
+    .a3 {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #E4E9F4, 0 20px 60px rgba(10,30,100,0.12);
+    }
+    .a3-bar {
+      background: linear-gradient(135deg, #1338BE 0%, #1652F0 50%, #1565C0 100%);
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .a3-bar::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .a3-bar::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: 60px;
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .a3-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .a3-logo-icon {
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .a3-logo-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .a3-logo-sub {
+      font-size: 9px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+    .a3-role-pill {
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 24px;
+      padding: 5px 14px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.95);
+      position: relative;
+      z-index: 1;
+    }
+    .a3-nav {
+      background: #fff;
+      display: flex;
+      padding: 0 22px;
+      border-bottom: 1px solid #EEF2FB;
+    }
+    .a3-nav-item {
+      padding: 12px 0;
+      margin-right: 24px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #BCC6DC;
+      border-bottom: 2.5px solid transparent;
+    }
+    .a3-nav-item.active {
+      color: #1338BE;
+      border-bottom-color: #1338BE;
+    }
+    .a3-body { background: #F5F7FD; padding: 18px; }
+    .a3-kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .a3-kpi {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(19,56,190,0.06), 0 0 0 1px #EEF2FB;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .a3-kpi-icon {
+      width: 30px; height: 30px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+    .a3-kpi-icon.blue { background: #EEF2FF; }
+    .a3-kpi-icon.red { background: #FEF2F2; }
+    .a3-kpi-icon.green { background: #F0FDF4; }
+    .a3-kpi-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      color: #0A1628;
+      letter-spacing: -0.03em;
+    }
+    .a3-kpi-lbl {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #94A3B8;
+    }
+    .a3-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(19,56,190,0.06), 0 0 0 1px #EEF2FB;
+    }
+    .a3-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid #F0F4FD;
+    }
+    .a3-card-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #0A1628;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .a3-card-pill {
+      background: #EEF2FF;
+      color: #1338BE;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .a3-row {
+      display: flex;
+      align-items: center;
+      padding: 11px 16px;
+      border-bottom: 1px solid #F5F7FD;
+      gap: 10px;
+    }
+    .a3-row:last-child { border-bottom: none; }
+    .a3-row-icon {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      background: #EEF2FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .a3-row-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0A1628;
+      letter-spacing: -0.01em;
+    }
+    .a3-row-meta {
+      font-size: 10.5px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+    .a3-badge {
+      border-radius: 8px;
+      padding: 3px 9px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .a3-badge.warn { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+    .a3-badge.err { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; }
+    .a3-badge.ok { background: #F0FDF4; color: #15803D; border: 1px solid #BBF7D0; }
+    .a3-btn {
+      margin-top: 13px;
+      background: linear-gradient(135deg, #1338BE, #1652F0);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 14px rgba(19,56,190,0.35);
+    }
+
+    /* ─── meta grid ─── */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 18px;
+      margin-top: 16px;
+    }
+    .meta-item {
+      font-size: 11px;
+      color: #3a3a5c;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .meta-item span { color: #666; margin-left: 5px; font-family: 'Geist Mono', monospace; font-size: 10px; }
+
+    .cta {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 13px;
+      color: #333;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .cta strong { color: #666; }
+  </style>
+</head>
+<body>
+  <div style="max-width: 1520px; margin: 0 auto;">
+    <p class="page-eyebrow">NeuBautUlm · Style A — Varianten</p>
+    <p class="page-title">Moderner. Stylischer.</p>
+    <p class="page-sub">Alle drei basieren auf „Präzision" — jede dreht andere Regler auf.</p>
+
+    <div class="grid">
+
+      <!-- ══ A1 ══════════════════════════════════════════ -->
+      <div>
+        <p class="col-label">A · 1</p>
+        <p class="col-name">Vercel</p>
+        <p class="col-desc">Maximaler Kontrast, Monospace-Daten,<br>Statusdots statt Badges. Wie Stripe oder Vercel.</p>
+
+        <div class="a1">
+          <div class="a1-bar">
+            <div class="a1-logo">
+              <div class="a1-logo-mark">
+                <svg viewBox="0 0 14 14" fill="none">
+                  <path d="M7 1L13 7L7 13L1 7L7 1Z" fill="white" fill-opacity="0.9"/>
+                </svg>
+              </div>
+              <span class="a1-logo-name">NeuBautUlm</span>
+            </div>
+            <div class="a1-role-badge">
+              <div class="a1-role-dot"></div>
+              <span class="a1-role-text">Sachbearbeiter:in</span>
+            </div>
+          </div>
+          <div class="a1-nav">
+            <span class="a1-nav-item active">Baustellen</span>
+            <span class="a1-nav-item">Mängel</span>
+            <span class="a1-nav-item">Karte</span>
+          </div>
+          <div class="a1-body">
+            <div class="a1-kpi-row">
+              <div class="a1-kpi blue">
+                <div class="a1-kpi-val">6</div>
+                <div class="a1-kpi-lbl">Baustellen</div>
+              </div>
+              <div class="a1-kpi red">
+                <div class="a1-kpi-val">11</div>
+                <div class="a1-kpi-lbl">Mängel offen</div>
+              </div>
+              <div class="a1-kpi green">
+                <div class="a1-kpi-val">1</div>
+                <div class="a1-kpi-lbl">Abgeschlossen</div>
+              </div>
+            </div>
+            <div class="a1-table">
+              <div class="a1-thead">
+                <div class="a1-th">Name</div>
+                <div class="a1-th" style="text-align:center">Status</div>
+                <div class="a1-th" style="text-align:center">Prio</div>
+              </div>
+              <div class="a1-row">
+                <div>
+                  <div class="a1-row-name">Bahnhofsplatz Sanierung</div>
+                  <div class="a1-row-sub">Bahnhofsplatz 1 · endet 31.07.</div>
+                </div>
+                <span class="a1-chip warn" style="justify-self:center">offen</span>
+                <span class="a1-chip err" style="justify-self:center">hoch</span>
+              </div>
+              <div class="a1-row">
+                <div>
+                  <div class="a1-row-name">Wileystraße Kanal</div>
+                  <div class="a1-row-sub">Wileystraße 45 · endet 15.05.</div>
+                </div>
+                <span class="a1-chip warn" style="justify-self:center">offen</span>
+                <span class="a1-chip info" style="justify-self:center">mittel</span>
+              </div>
+              <div class="a1-row">
+                <div>
+                  <div class="a1-row-name">Ringstraße Asphalt</div>
+                  <div class="a1-row-sub">Ringstraße 3 · fertiggestellt</div>
+                </div>
+                <span class="a1-chip ok" style="justify-self:center">fertig</span>
+                <span class="a1-chip" style="justify-self:center;background:#F3F4F6;color:#6B7280;border:1px solid #E5E7EB">niedrig</span>
+              </div>
+            </div>
+            <button class="a1-btn">＋ Neue Baustelle</button>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-item">Header<span>#fff mit Rahmen</span></div>
+          <div class="meta-item">Accent<span>#0F44B8</span></div>
+          <div class="meta-item">Font<span>Manrope + Geist Mono</span></div>
+          <div class="meta-item">Chips<span>Mono, rechteckig</span></div>
+          <div class="meta-item">KPI<span>Linker Farbbalken</span></div>
+          <div class="meta-item">Feel<span>Stripe, Vercel</span></div>
+        </div>
+      </div>
+
+      <!-- ══ A2 ══════════════════════════════════════════ -->
+      <div>
+        <p class="col-label">A · 2</p>
+        <p class="col-name">Blueprint</p>
+        <p class="col-desc">Deep-Navy-Header, weißer Body, technische<br>Typografie. Wie Vercel trifft auf Behördenernst.</p>
+
+        <div class="a2">
+          <div class="a2-bar">
+            <div class="a2-logo">
+              NeuBautUlm
+              <span class="a2-logo-accent">Beta</span>
+            </div>
+            <div class="a2-user">
+              <div class="a2-avatar">SB</div>
+              <span class="a2-username">Sachbearbeiter:in</span>
+            </div>
+          </div>
+          <div class="a2-nav">
+            <span class="a2-nav-item active">Baustellen</span>
+            <span class="a2-nav-item">Mängel</span>
+            <span class="a2-nav-item">Karte</span>
+          </div>
+          <div class="a2-body">
+            <div class="a2-section-head">
+              <div class="a2-section-title">Übersicht</div>
+              <div class="a2-section-count">Stand: 20.05.2026</div>
+            </div>
+            <div class="a2-kpi-row">
+              <div class="a2-kpi">
+                <div class="a2-kpi-val">6</div>
+                <div class="a2-kpi-lbl">Baustellen</div>
+              </div>
+              <div class="a2-kpi">
+                <div class="a2-kpi-val" style="color:#DC2626">11</div>
+                <div class="a2-kpi-lbl">Mängel</div>
+                <div class="a2-kpi-delta">▲ 2 heute</div>
+              </div>
+              <div class="a2-kpi">
+                <div class="a2-kpi-val" style="color:#16A34A">1</div>
+                <div class="a2-kpi-lbl">Fertig</div>
+              </div>
+            </div>
+            <div class="a2-list">
+              <div class="a2-list-head">
+                <div class="a2-list-th">Baustelle</div>
+                <div class="a2-list-th">Status</div>
+                <div class="a2-list-th">Priorität</div>
+              </div>
+              <div class="a2-list-row">
+                <div>
+                  <div class="a2-name">Bahnhofsplatz</div>
+                  <div class="a2-sub">bs-1 · 3 Mängel</div>
+                </div>
+                <div class="a2-status">
+                  <div class="a2-status-dot offen"></div>offen
+                </div>
+                <div class="a2-prio hoch">HOCH</div>
+              </div>
+              <div class="a2-list-row">
+                <div>
+                  <div class="a2-name">Wileystraße Kanal</div>
+                  <div class="a2-sub">bs-3 · 2 Mängel</div>
+                </div>
+                <div class="a2-status">
+                  <div class="a2-status-dot offen"></div>offen
+                </div>
+                <div class="a2-prio mittel">MITTEL</div>
+              </div>
+              <div class="a2-list-row">
+                <div>
+                  <div class="a2-name">Ringstraße Asphalt</div>
+                  <div class="a2-sub">bs-4 · 0 Mängel</div>
+                </div>
+                <div class="a2-status">
+                  <div class="a2-status-dot ok"></div>fertig
+                </div>
+                <div class="a2-prio" style="color:#CBD5E1">NIEDRIG</div>
+              </div>
+            </div>
+            <button class="a2-btn">＋ Neue Baustelle</button>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-item">Header<span>#08122B navy</span></div>
+          <div class="meta-item">Accent<span>#63B3ED</span></div>
+          <div class="meta-item">Font<span>Bricolage + Geist Mono</span></div>
+          <div class="meta-item">Daten<span>Glowing Dots</span></div>
+          <div class="meta-item">KPI<span>Trennlinien, verbunden</span></div>
+          <div class="meta-item">Feel<span>Railway, GitHub</span></div>
+        </div>
+      </div>
+
+      <!-- ══ A3 ══════════════════════════════════════════ -->
+      <div>
+        <p class="col-label">A · 3</p>
+        <p class="col-name">Civic Premium</p>
+        <p class="col-desc">Gradient-Header, Icon-Kacheln, großzügige<br>Abstände. Wie wenn Apple eine Behörden-App macht.</p>
+
+        <div class="a3">
+          <div class="a3-bar">
+            <div class="a3-logo">
+              <div class="a3-logo-icon">🏗️</div>
+              <div>
+                <div class="a3-logo-text">NeuBautUlm</div>
+                <div class="a3-logo-sub">Stadtverwaltung · Digital</div>
+              </div>
+            </div>
+            <div class="a3-role-pill">⬡ Sachbearbeiter:in</div>
+          </div>
+          <div class="a3-nav">
+            <span class="a3-nav-item active">Baustellen</span>
+            <span class="a3-nav-item">Mängel</span>
+            <span class="a3-nav-item">Karte</span>
+          </div>
+          <div class="a3-body">
+            <div class="a3-kpi-row">
+              <div class="a3-kpi">
+                <div class="a3-kpi-icon blue">🏗️</div>
+                <div class="a3-kpi-val">6</div>
+                <div class="a3-kpi-lbl">Baustellen</div>
+              </div>
+              <div class="a3-kpi">
+                <div class="a3-kpi-icon red">⚠️</div>
+                <div class="a3-kpi-val" style="color:#DC2626">11</div>
+                <div class="a3-kpi-lbl">Offene Mängel</div>
+              </div>
+              <div class="a3-kpi">
+                <div class="a3-kpi-icon green">✅</div>
+                <div class="a3-kpi-val" style="color:#15803D">1</div>
+                <div class="a3-kpi-lbl">Abgeschlossen</div>
+              </div>
+            </div>
+            <div class="a3-card">
+              <div class="a3-card-header">
+                <span class="a3-card-title">Aktive Baustellen</span>
+                <span class="a3-card-pill">5 aktiv</span>
+              </div>
+              <div class="a3-row">
+                <div class="a3-row-icon">🚧</div>
+                <div style="flex:1">
+                  <div class="a3-row-name">Bahnhofsplatz Sanierung</div>
+                  <div class="a3-row-meta">bis 31.07.2026 · 3 Mängel</div>
+                </div>
+                <span class="a3-badge warn">Offen</span>
+                <span class="a3-badge err" style="margin-left:5px">Hoch</span>
+              </div>
+              <div class="a3-row">
+                <div class="a3-row-icon">🔧</div>
+                <div style="flex:1">
+                  <div class="a3-row-name">Wileystraße Kanal</div>
+                  <div class="a3-row-meta">bis 15.05.2026 · 2 Mängel</div>
+                </div>
+                <span class="a3-badge warn">Offen</span>
+              </div>
+              <div class="a3-row">
+                <div class="a3-row-icon" style="background:#F0FDF4">✓</div>
+                <div style="flex:1">
+                  <div class="a3-row-name">Ringstraße Asphalt</div>
+                  <div class="a3-row-meta">abgeschlossen · 0 Mängel</div>
+                </div>
+                <span class="a3-badge ok">Fertig</span>
+              </div>
+            </div>
+            <button class="a3-btn">＋ Neue Baustelle</button>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-item">Header<span>Blau-Gradient</span></div>
+          <div class="meta-item">Accent<span>#1338BE</span></div>
+          <div class="meta-item">Font<span>Manrope (800)</span></div>
+          <div class="meta-item">Icons<span>Emoji-Kacheln</span></div>
+          <div class="meta-item">KPI<span>Cards mit Icon</span></div>
+          <div class="meta-item">Feel<span>Apple, Notion, Linear</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="cta" style="margin-top:60px">
+      Wähle <strong>A1, A2 oder A3</strong> — ich implementiere dann alle Vuetify-Komponenten in diesem Style.
+    </p>
+  </div>
+</body>
+</html>

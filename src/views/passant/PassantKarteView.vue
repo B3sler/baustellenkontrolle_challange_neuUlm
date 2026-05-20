@@ -30,7 +30,7 @@ const maengelStore = useMaengelStore()
 <style scoped>
 .pk-container {
   position: relative;
-  height: calc(100vh - 108px);
+  height: calc(100vh - 56px);
 }
 
 .pk-legend {

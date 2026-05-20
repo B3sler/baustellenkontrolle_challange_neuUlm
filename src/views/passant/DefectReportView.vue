@@ -106,7 +106,7 @@ function markerColor(status: MaengelStatus) {
 <style scoped>
 .dr-container {
   position: relative;
-  height: calc(100vh - 108px);
+  height: calc(100vh - 56px);
 }
 
 .dr-map {

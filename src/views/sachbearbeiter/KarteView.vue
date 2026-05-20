@@ -58,7 +58,7 @@ function focusMangel(m: Mangel) {
 <style scoped>
 .kv-container {
   display: flex;
-  height: calc(100vh - 108px);
+  height: calc(100vh - 56px);
   overflow: hidden;
 }
 

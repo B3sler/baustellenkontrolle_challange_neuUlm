@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuBautUlm – Style-Vergleich</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0f;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      padding: 40px 24px;
+      min-height: 100vh;
+    }
+    .page-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .page-subtitle {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 48px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .option-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 16px;
+      padding-left: 4px;
+    }
+    .option-name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .option-desc {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* ─── STYLE A: Präzision ─────────────────────────────────── */
+    .style-a {
+      background: #FFFFFF;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #1565C0;
+    }
+    .sa-header {
+      background: #1565C0;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sa-header-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .sa-header-role {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+    .sa-tabs {
+      display: flex;
+      border-bottom: 1px solid #E8EDF4;
+      padding: 0 20px;
+      background: #fff;
+    }
+    .sa-tab {
+      padding: 12px 0;
+      margin-right: 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #94A3B8;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sa-tab.active {
+      color: #1565C0;
+      border-bottom-color: #1565C0;
+    }
+    .sa-body { padding: 20px; background: #F8FAFD; }
+    .sa-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .sa-chip {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid #CBD5E1;
+      background: #fff;
+      color: #475569;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sa-chip.active {
+      background: #EFF6FF;
+      border-color: #1565C0;
+      color: #1565C0;
+    }
+    .sa-table { background: #fff; border-radius: 10px; border: 1px solid #E2E8F0; overflow: hidden; }
+    .sa-thead { background: #F1F5F9; }
+    .sa-th {
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748B;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sa-tr { border-top: 1px solid #F1F5F9; display: flex; }
+    .sa-td {
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #334155;
+      flex: 1;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .sa-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .sa-badge.offen { background: #FEF3C7; color: #92400E; }
+    .sa-badge.hoch { background: #FEE2E2; color: #991B1B; }
+    .sa-badge.abg { background: #D1FAE5; color: #065F46; }
+    .sa-btn {
+      margin-top: 14px;
+      background: #1565C0;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+    }
+    .sa-stat-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .sa-stat {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .sa-stat-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1565C0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sa-stat-lbl {
+      font-size: 10px;
+      color: #94A3B8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── STYLE B: Schiefer (Slate Dark) ─────────────────────── */
+    .style-b {
+      background: #0F1923;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #1E3A5F;
+    }
+    .sb-header {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 60%, #0288D1 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sb-header-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .sb-header-role {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.9);
+      font-family: 'Outfit', sans-serif;
+    }
+    .sb-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px;
+      background: #111B28;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sb-tab {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #4A6580;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.03em;
+    }
+    .sb-tab.active {
+      background: rgba(21, 101, 192, 0.25);
+      color: #42A5F5;
+      border: 1px solid rgba(66, 165, 245, 0.3);
+    }
+    .sb-body { padding: 16px; background: #0F1923; }
+    .sb-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .sb-stat {
+      background: #111B28;
+      border: 1px solid #1E3A5F;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .sb-stat-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: #42A5F5;
+      font-family: 'Outfit', sans-serif;
+    }
+    .sb-stat-lbl {
+      font-size: 10px;
+      color: #4A6580;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .sb-card {
+      background: #111B28;
+      border: 1px solid #1E3A5F;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .sb-card-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sb-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #4A6580;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: 'Outfit', sans-serif;
+    }
+    .sb-row {
+      display: flex;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      align-items: center;
+    }
+    .sb-row:last-child { border-bottom: none; }
+    .sb-row-name {
+      flex: 1;
+      font-size: 12px;
+      color: #CBD5E1;
+      font-family: 'Outfit', sans-serif;
+    }
+    .sb-row-sub {
+      font-size: 10px;
+      color: #4A6580;
+    }
+    .sb-pill {
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+    }
+    .sb-pill.offen { background: rgba(245,127,23,0.15); color: #FFA726; border: 1px solid rgba(245,127,23,0.3); }
+    .sb-pill.hoch { background: rgba(211,47,47,0.15); color: #EF5350; border: 1px solid rgba(211,47,47,0.3); }
+    .sb-pill.abg { background: rgba(46,125,50,0.15); color: #66BB6A; border: 1px solid rgba(46,125,50,0.3); }
+    .sb-btn {
+      margin-top: 12px;
+      background: linear-gradient(135deg, #1565C0, #0288D1);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(21,101,192,0.4);
+    }
+
+    /* ─── STYLE C: Licht (Warm Minimal) ──────────────────────── */
+    .style-c {
+      background: #FAFAF8;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #E8E5DF;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .sc-header {
+      background: #1B4332;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sc-header-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Nunito Sans', sans-serif;
+      letter-spacing: -0.01em;
+    }
+    .sc-header-role {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.95);
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .sc-tabs {
+      display: flex;
+      padding: 0 20px;
+      background: #fff;
+      border-bottom: 1px solid #EDE9E3;
+    }
+    .sc-tab {
+      padding: 13px 0;
+      margin-right: 22px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #A09E99;
+      border-bottom: 2px solid transparent;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .sc-tab.active {
+      color: #1B4332;
+      border-bottom-color: #2D6A4F;
+    }
+    .sc-body { padding: 18px; }
+    .sc-stat-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .sc-stat {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #EDE9E3;
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .sc-stat-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2D6A4F;
+      font-family: 'Nunito Sans', sans-serif;
+      line-height: 1;
+    }
+    .sc-stat-lbl {
+      font-size: 10px;
+      color: #A09E99;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+    .sc-card {
+      background: #fff;
+      border: 1px solid #EDE9E3;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .sc-row {
+      display: flex;
+      align-items: center;
+      padding: 11px 16px;
+      border-bottom: 1px solid #F4F2EF;
+    }
+    .sc-row:last-child { border-bottom: none; }
+    .sc-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .sc-dot.offen { background: #F59E0B; }
+    .sc-dot.hoch { background: #EF4444; }
+    .sc-dot.abg { background: #2D6A4F; }
+    .sc-row-name {
+      flex: 1;
+      font-size: 12.5px;
+      color: #2C2A27;
+      font-weight: 600;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .sc-row-sub {
+      font-size: 10.5px;
+      color: #A09E99;
+      font-weight: 400;
+    }
+    .sc-tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .sc-tag.offen { background: #FEF3C7; color: #B45309; }
+    .sc-tag.hoch { background: #FEE2E2; color: #B91C1C; }
+    .sc-tag.abg { background: #D1FAE5; color: #065F46; }
+    .sc-btn {
+      margin-top: 14px;
+      background: #2D6A4F;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 11px 20px;
+      font-size: 12.5px;
+      font-weight: 700;
+      font-family: 'Nunito Sans', sans-serif;
+      cursor: pointer;
+    }
+
+    /* labels below each option */
+    .kv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 16px;
+      margin-top: 14px;
+    }
+    .kv { font-size: 11px; color: #555; }
+    .kv span { color: #bbb; margin-left: 4px; }
+  </style>
+</head>
+<body>
+  <div style="max-width:1400px; margin:0 auto;">
+    <p class="page-title">NeuBautUlm · Redesign</p>
+    <p class="page-subtitle">Wähle deinen Style</p>
+
+    <div class="grid">
+
+      <!-- ── OPTION A ─────────────────────────────────── -->
+      <div>
+        <p class="option-label">Option A</p>
+        <p class="option-name" style="color:#fff">Präzision</p>
+        <p class="option-desc">Behördlich-modern. Scharf, präzise, datenfokussiert.<br>Maximale Lesbarkeit für Sachbearbeiter.</p>
+
+        <div class="style-a">
+          <div class="sa-header">
+            <span class="sa-header-title">NeuBautUlm</span>
+            <span class="sa-header-role">Sachbearbeiter:in</span>
+          </div>
+          <div class="sa-tabs">
+            <span class="sa-tab active">Baustellen</span>
+            <span class="sa-tab">Mängel</span>
+            <span class="sa-tab">Karte</span>
+          </div>
+          <div class="sa-body">
+            <div class="sa-stat-row">
+              <div class="sa-stat">
+                <div class="sa-stat-val">6</div>
+                <div class="sa-stat-lbl">Baustellen</div>
+              </div>
+              <div class="sa-stat">
+                <div class="sa-stat-val" style="color:#DC2626;">11</div>
+                <div class="sa-stat-lbl">Mängel</div>
+              </div>
+              <div class="sa-stat">
+                <div class="sa-stat-val" style="color:#059669;">1</div>
+                <div class="sa-stat-lbl">Abgeschlossen</div>
+              </div>
+            </div>
+            <div class="sa-filters">
+              <span class="sa-chip active">Alle</span>
+              <span class="sa-chip">Offen</span>
+              <span class="sa-chip">In Prüfung</span>
+            </div>
+            <div class="sa-table">
+              <div class="sa-thead">
+                <div style="display:flex;">
+                  <div class="sa-th" style="flex:2">Name</div>
+                  <div class="sa-th">Status</div>
+                  <div class="sa-th">Priorität</div>
+                </div>
+              </div>
+              <div class="sa-tr">
+                <div class="sa-td" style="flex:2;font-weight:600">Bahnhofsplatz Sanierung</div>
+                <div class="sa-td"><span class="sa-badge offen">Offen</span></div>
+                <div class="sa-td"><span class="sa-badge hoch">Hoch</span></div>
+              </div>
+              <div class="sa-tr">
+                <div class="sa-td" style="flex:2;font-weight:600">Wileystraße Kanal</div>
+                <div class="sa-td"><span class="sa-badge offen">Offen</span></div>
+                <div class="sa-td"><span class="sa-badge" style="background:#EDE9FE;color:#5B21B6;">Mittel</span></div>
+              </div>
+              <div class="sa-tr">
+                <div class="sa-td" style="flex:2;font-weight:600">Ringstraße Asphalt</div>
+                <div class="sa-td"><span class="sa-badge abg">Abgeschlossen</span></div>
+                <div class="sa-td"><span class="sa-badge" style="background:#D1FAE5;color:#065F46;">Niedrig</span></div>
+              </div>
+            </div>
+            <button class="sa-btn">+ Neue Baustelle</button>
+          </div>
+        </div>
+
+        <div class="kv-grid">
+          <div class="kv">Hintergrund<span>#F8FAFD / Weiß</span></div>
+          <div class="kv">Primary<span>#1565C0</span></div>
+          <div class="kv">Font<span>Plus Jakarta Sans</span></div>
+          <div class="kv">Radius<span>6–10px</span></div>
+          <div class="kv">Feel<span>SAP Fiori, DB</span></div>
+          <div class="kv">Modus<span>Hell</span></div>
+        </div>
+      </div>
+
+      <!-- ── OPTION B ─────────────────────────────────── -->
+      <div>
+        <p class="option-label">Option B</p>
+        <p class="option-name" style="color:#fff">Schiefer</p>
+        <p class="option-desc">Dark Command Center. Professionell, intensiv.<br>Wie ein Operations-Dashboard der Stadtverwaltung.</p>
+
+        <div class="style-b">
+          <div class="sb-header">
+            <span class="sb-header-title">NeuBautUlm</span>
+            <span class="sb-header-role">Sachbearbeiter:in</span>
+          </div>
+          <div class="sb-tabs">
+            <span class="sb-tab active">Baustellen</span>
+            <span class="sb-tab">Mängel</span>
+            <span class="sb-tab">Karte</span>
+          </div>
+          <div class="sb-body">
+            <div class="sb-stat-row">
+              <div class="sb-stat">
+                <div class="sb-stat-val">6</div>
+                <div class="sb-stat-lbl">Baustellen</div>
+              </div>
+              <div class="sb-stat">
+                <div class="sb-stat-val" style="color:#EF5350;">11</div>
+                <div class="sb-stat-lbl">Mängel</div>
+              </div>
+              <div class="sb-stat">
+                <div class="sb-stat-val" style="color:#66BB6A;">1</div>
+                <div class="sb-stat-lbl">Erledigt</div>
+              </div>
+            </div>
+            <div class="sb-card">
+              <div class="sb-card-header">
+                <span class="sb-card-title">Aktive Baustellen</span>
+                <span style="font-size:10px;color:#4A6580;font-family:'Outfit',sans-serif;">5 aktiv</span>
+              </div>
+              <div class="sb-row">
+                <div style="flex:1">
+                  <div class="sb-row-name">Bahnhofsplatz Sanierung</div>
+                  <div class="sb-row-sub">Bahnhofsplatz 1 · bl-1</div>
+                </div>
+                <span class="sb-pill offen">Offen</span>
+                <span class="sb-pill hoch" style="margin-left:6px;">Hoch</span>
+              </div>
+              <div class="sb-row">
+                <div style="flex:1">
+                  <div class="sb-row-name">Wileystraße Kanal</div>
+                  <div class="sb-row-sub">Wileystraße 45 · bl-1</div>
+                </div>
+                <span class="sb-pill offen">Offen</span>
+                <span class="sb-pill" style="background:rgba(99,102,241,0.15);color:#818CF8;border:1px solid rgba(99,102,241,0.3);margin-left:6px;">Mittel</span>
+              </div>
+              <div class="sb-row">
+                <div style="flex:1">
+                  <div class="sb-row-name">Ringstraße Asphalt</div>
+                  <div class="sb-row-sub">Ringstraße 3 · bl-2</div>
+                </div>
+                <span class="sb-pill abg">Abgeschl.</span>
+              </div>
+            </div>
+            <button class="sb-btn">+ Neue Baustelle</button>
+          </div>
+        </div>
+
+        <div class="kv-grid">
+          <div class="kv">Hintergrund<span>#0F1923</span></div>
+          <div class="kv">Primary<span>#42A5F5</span></div>
+          <div class="kv">Font<span>Outfit</span></div>
+          <div class="kv">Radius<span>8–12px</span></div>
+          <div class="kv">Feel<span>Grafana, Linear</span></div>
+          <div class="kv">Modus<span>Dunkel</span></div>
+        </div>
+      </div>
+
+      <!-- ── OPTION C ─────────────────────────────────── -->
+      <div>
+        <p class="option-label">Option C</p>
+        <p class="option-name" style="color:#fff">Licht</p>
+        <p class="option-desc">Warm-minimalistisch. Grün als Primärfarbe.<br>Offen, einladend — auch für Passanten geeignet.</p>
+
+        <div class="style-c">
+          <div class="sc-header">
+            <span class="sc-header-title">NeuBautUlm</span>
+            <span class="sc-header-role">Sachbearbeiter:in</span>
+          </div>
+          <div class="sc-tabs">
+            <span class="sc-tab active">Baustellen</span>
+            <span class="sc-tab">Mängel</span>
+            <span class="sc-tab">Karte</span>
+          </div>
+          <div class="sc-body">
+            <div class="sc-stat-row">
+              <div class="sc-stat">
+                <div class="sc-stat-val">6</div>
+                <div class="sc-stat-lbl">Baustellen</div>
+              </div>
+              <div class="sc-stat">
+                <div class="sc-stat-val" style="color:#DC2626;">11</div>
+                <div class="sc-stat-lbl">Mängel</div>
+              </div>
+              <div class="sc-stat">
+                <div class="sc-stat-val">1</div>
+                <div class="sc-stat-lbl">Erledigt</div>
+              </div>
+            </div>
+            <div class="sc-card">
+              <div class="sc-row">
+                <div class="sc-dot offen"></div>
+                <div style="flex:1">
+                  <div class="sc-row-name">Bahnhofsplatz Sanierung</div>
+                  <div class="sc-row-sub">Bahnhofsplatz 1 · bis 31.07.2026</div>
+                </div>
+                <span class="sc-tag offen">Offen</span>
+                <span class="sc-tag hoch" style="margin-left:6px;">Hoch</span>
+              </div>
+              <div class="sc-row">
+                <div class="sc-dot offen"></div>
+                <div style="flex:1">
+                  <div class="sc-row-name">Wileystraße Kanalsanierung</div>
+                  <div class="sc-row-sub">Wileystraße 45 · bis 15.05.2026</div>
+                </div>
+                <span class="sc-tag offen">Offen</span>
+                <span class="sc-tag" style="background:#EDE9FE;color:#6D28D9;margin-left:6px;">Mittel</span>
+              </div>
+              <div class="sc-row">
+                <div class="sc-dot abg"></div>
+                <div style="flex:1">
+                  <div class="sc-row-name">Ringstraße Asphaltierung</div>
+                  <div class="sc-row-sub">Ringstraße 3 · abgeschlossen</div>
+                </div>
+                <span class="sc-tag abg">Fertig</span>
+              </div>
+            </div>
+            <button class="sc-btn">+ Neue Baustelle</button>
+          </div>
+        </div>
+
+        <div class="kv-grid">
+          <div class="kv">Hintergrund<span>#FAFAF8</span></div>
+          <div class="kv">Primary<span>#2D6A4F</span></div>
+          <div class="kv">Font<span>Nunito Sans</span></div>
+          <div class="kv">Radius<span>12–20px</span></div>
+          <div class="kv">Feel<span>Notion, Hey.com</span></div>
+          <div class="kv">Modus<span>Hell (warm)</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center; margin-top:48px; color:#444; font-size:13px; font-family:'DM Sans',sans-serif;">
+      Sage mir <strong style="color:#888">A, B oder C</strong> — ich implementiere dann alles in Vuetify.
+    </p>
+  </div>
+</body>
+</html>
