@@ -1,7 +1,11 @@
 <template>
-  <div>PassantKarteView Stub</div>
+  <div style="height: calc(100vh - 120px)">
+    <MapView :maengel="maengelStore.maengel" :baustellen="[]" />
+  </div>
 </template>
 
 <script setup lang="ts">
-// Stub component - implemented in Task 12
+import MapView from '../../components/MapView.vue'
+import { useMaengelStore } from '../../stores/maengelStore'
+const maengelStore = useMaengelStore()
 </script>
