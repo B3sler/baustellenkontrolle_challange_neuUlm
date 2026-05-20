@@ -511,7 +511,7 @@ function addDummyBild() {
 
 .bv-overview-grid {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -597,7 +597,7 @@ function addDummyBild() {
   border: 1px solid #E2E8F0;
   border-radius: 10px;
   overflow: hidden;
-  min-height: 220px;
+  min-height: 360px;
 }
 
 .bv-timeline-card {
