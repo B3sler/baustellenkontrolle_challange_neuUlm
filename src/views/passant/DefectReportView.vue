@@ -9,8 +9,9 @@
         @click="onMapClick"
       >
         <l-tile-layer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; OpenStreetMap contributors"
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          :max-zoom="19"
         />
         <l-circle-marker
           v-for="m in maengelStore.maengel"
@@ -29,8 +30,8 @@
           v-if="selectedLat !== 0"
           :lat-lng="[selectedLat, selectedLng]"
           :radius="11"
-          color="#2563EB"
-          fill-color="#2563EB"
+          color="#38BDF8"
+          fill-color="#38BDF8"
           :fill-opacity="0.5"
           :weight="2"
         />
@@ -99,7 +100,7 @@ function onCancel() {
 }
 
 function markerColor(status: MaengelStatus) {
-  return { offen: '#F59E0B', in_bearbeitung: '#3B82F6', erledigt: '#22C55E' }[status]
+  return { offen: '#FB923C', in_bearbeitung: '#60A5FA', erledigt: '#4ADE80' }[status]
 }
 </script>
 
