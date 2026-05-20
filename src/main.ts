@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import 'leaflet/dist/leaflet.css'
+import './utils/leafletIcons'
 import App from './App.vue'
 
 const app = createApp(App)

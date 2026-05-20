@@ -50,13 +50,14 @@
             </v-card>
           </v-col>
           <v-col cols="12" md="6">
-            <!-- TODO Task 9: Replace with <MapView :baustellen="[baustelle]" :maengel="[]" :center="[baustelle.lat, baustelle.lng]" :zoom="15" /> -->
-            <v-card variant="outlined" class="pa-4 d-flex align-center justify-center" style="height: 250px">
-              <div class="text-center text-medium-emphasis">
-                <v-icon size="48" class="mb-2">mdi-map-marker</v-icon>
-                <div>Karte: {{ baustelle.lat.toFixed(4) }}, {{ baustelle.lng.toFixed(4) }}</div>
-              </div>
-            </v-card>
+            <div style="height: 250px">
+              <MapView
+                :baustellen="[baustelle]"
+                :maengel="[]"
+                :center="[baustelle.lat, baustelle.lng]"
+                :zoom="15"
+              />
+            </div>
           </v-col>
         </v-row>
         <!-- Timeline -->
@@ -184,6 +185,7 @@ import { useBaustellenStore } from '../../stores/baustellenStore'
 import { useMaengelStore } from '../../stores/maengelStore'
 import { useRoleStore } from '../../stores/roleStore'
 import type { BaustellenStatus, Dokument, Bild } from '../../types/types'
+import MapView from '../../components/MapView.vue'
 
 const route = useRoute()
 const router = useRouter()
