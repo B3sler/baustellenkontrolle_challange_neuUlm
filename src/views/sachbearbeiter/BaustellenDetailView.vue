@@ -67,22 +67,48 @@
                 <span class="bp-section-title">Stammdaten</span>
               </div>
               <div class="bv-data-list">
+                <div class="bv-data-group-label bp-mono">Allgemein</div>
                 <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Priorität</span>
-                  <span class="bp-prio" :class="`bp-prio--${baustelle.prioritaet}`">{{ baustelle.prioritaet }}</span>
+                  <span class="bv-data-label bp-mono">Genehmigung</span>
+                  <span class="bv-data-value bp-mono">{{ baustelle.genehmigungsNr }}</span>
                 </div>
                 <div class="bv-data-row">
                   <span class="bv-data-label bp-mono">Zeitraum</span>
                   <span class="bv-data-value bp-mono">{{ baustelle.startDatum }} – {{ baustelle.endDatum }}</span>
                 </div>
                 <div class="bv-data-row">
-                  <span class="bv-data-label bp-mono">Bauleiter ID</span>
-                  <span class="bv-data-value bp-mono">{{ baustelle.bauleiterId }}</span>
+                  <span class="bv-data-label bp-mono">Priorität</span>
+                  <span class="bp-prio" :class="`bp-prio--${baustelle.prioritaet}`">{{ baustelle.prioritaet }}</span>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Auftragswert</span>
+                  <span class="bv-data-value bv-data-value--bold">{{ baustelle.auftragswert }}</span>
                 </div>
                 <div class="bv-data-row">
                   <span class="bv-data-label bp-mono">Offene Mängel</span>
                   <span class="bv-maengel-val">{{ baustelle.offenerMaengelCount }}</span>
                 </div>
+
+                <div class="bv-data-group-label bp-mono" style="margin-top:10px">Auftragnehmer</div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Firma</span>
+                  <span class="bv-data-value bv-data-value--bold">{{ baustelle.firma }}</span>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Ansprechpartner</span>
+                  <span class="bv-data-value">{{ baustelle.ansprechpartner }}</span>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">Telefon</span>
+                  <a :href="`tel:${baustelle.telefon}`" class="bv-data-link">{{ baustelle.telefon }}</a>
+                </div>
+                <div class="bv-data-row">
+                  <span class="bv-data-label bp-mono">E-Mail</span>
+                  <a :href="`mailto:${baustelle.email}`" class="bv-data-link">{{ baustelle.email }}</a>
+                </div>
+
+                <div class="bv-data-group-label bp-mono" style="margin-top:10px">Beschreibung</div>
+                <div class="bv-data-desc">{{ baustelle.beschreibung }}</div>
               </div>
             </div>
             <div class="bv-map-card">
@@ -512,16 +538,52 @@ function addDummyBild() {
 }
 .bv-data-row:last-child { border-bottom: none; }
 
+.bv-data-group-label {
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #CBD5E1;
+  padding-top: 4px;
+  padding-bottom: 2px;
+}
+
 .bv-data-label {
   font-size: 9.5px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #94A3B8;
+  flex-shrink: 0;
 }
 
 .bv-data-value {
-  font-size: 11.5px;
+  font-size: 12.5px;
   color: #0F172A;
+  text-align: right;
+}
+
+.bv-data-value--bold {
+  font-weight: 700;
+}
+
+.bv-data-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  color: #2563EB;
+  text-decoration: none;
+  text-align: right;
+  transition: color 0.12s;
+}
+.bv-data-link:hover {
+  color: #1D4ED8;
+  text-decoration: underline;
+}
+
+.bv-data-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.6;
+  padding: 8px 0 4px;
 }
 
 .bv-maengel-val {

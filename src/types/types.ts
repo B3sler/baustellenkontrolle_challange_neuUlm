@@ -14,6 +14,15 @@ export interface Baustelle {
   startDatum: string
   endDatum: string
   offenerMaengelCount: number
+  // Auftragnehmer
+  firma: string
+  ansprechpartner: string
+  telefon: string
+  email: string
+  // Verwaltung
+  genehmigungsNr: string
+  auftragswert: string
+  beschreibung: string
 }
 
 export interface Mangel {
