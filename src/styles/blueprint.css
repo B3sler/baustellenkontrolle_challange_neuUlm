@@ -1,0 +1,234 @@
+/* ═══════════════════════════════════════════════
+   NEUBAUTULM — BLUEPRINT DESIGN SYSTEM
+═══════════════════════════════════════════════ */
+
+:root {
+  --navy-900: #08122B;
+  --navy-800: #0D1A38;
+  --navy-700: #1E3A5F;
+  --blue-400: #63B3ED;
+  --blue-500: #2563EB;
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Global typography ── */
+body,
+.v-application,
+.v-application * {
+  font-family: var(--font-body) !important;
+}
+
+/* ── Headings use display font ── */
+h1, h2, h3, h4, h5, h6,
+.bp-heading {
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.02em;
+}
+
+/* ── Mono class ── */
+.bp-mono {
+  font-family: var(--font-mono) !important;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* ── v-data-table Blueprint styling ── */
+.v-data-table {
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+.v-data-table__thead tr th {
+  background: #F8FAFC !important;
+  font-family: var(--font-mono) !important;
+  font-size: 9.5px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 10px 16px !important;
+}
+.v-data-table__tbody tr td {
+  border-bottom: 1px solid #F1F5F9 !important;
+  padding: 11px 16px !important;
+  color: var(--text-primary) !important;
+  font-size: 13px !important;
+}
+.v-data-table__tbody tr:last-child td {
+  border-bottom: none !important;
+}
+.v-data-table__tbody tr:hover td {
+  background: #F8FAFC !important;
+}
+
+/* ── v-chip Blueprint overrides ── */
+.v-chip {
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  border-radius: 5px !important;
+  font-weight: 500 !important;
+}
+
+/* ── v-card Blueprint ── */
+.bp-card {
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+/* ── Status dots ── */
+.bp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+.bp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.bp-dot--offen        { background: #F59E0B; box-shadow: 0 0 5px rgba(245,158,11,0.6); }
+.bp-dot--in_pruefung  { background: #8B5CF6; box-shadow: 0 0 5px rgba(139,92,246,0.6); }
+.bp-dot--abgeschlossen{ background: #22C55E; box-shadow: 0 0 5px rgba(34,197,94,0.6); }
+.bp-dot--in_bearbeitung{ background: #3B82F6; box-shadow: 0 0 5px rgba(59,130,246,0.6); }
+.bp-dot--erledigt     { background: #22C55E; box-shadow: 0 0 5px rgba(34,197,94,0.6); }
+
+/* ── Prio labels ── */
+.bp-prio {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+.bp-prio--hoch   { color: #EF4444; }
+.bp-prio--mittel { color: #94A3B8; }
+.bp-prio--niedrig{ color: #CBD5E1; }
+
+/* ── KPI connected blocks ── */
+.bp-kpi-row {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+.bp-kpi-block {
+  flex: 1;
+  padding: 14px 18px;
+  border-right: 1px solid var(--border);
+}
+.bp-kpi-block:last-child {
+  border-right: none;
+}
+.bp-kpi-value {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.bp-kpi-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+.bp-kpi-delta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  margin-top: 2px;
+}
+.bp-kpi-delta--up   { color: #EF4444; }
+.bp-kpi-delta--down { color: #22C55E; }
+
+/* ── Section headers ── */
+.bp-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.bp-section-title {
+  font-family: var(--font-heading) !important;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.bp-section-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ── Buttons ── */
+.v-btn.bp-btn-primary {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  border-radius: 8px !important;
+}
+
+/* ── Filter inputs ── */
+.bp-filter .v-field {
+  border-radius: 8px !important;
+}
+.bp-filter .v-field__outline {
+  --v-field-border-color: var(--border) !important;
+}
+
+/* ── v-tabs on dark background ── */
+.bp-nav-tabs .v-tab {
+  font-family: var(--font-body) !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+  color: rgba(255,255,255,0.4) !important;
+  text-transform: none !important;
+  min-width: unset !important;
+  padding: 0 16px !important;
+}
+.bp-nav-tabs .v-tab--selected {
+  color: #63B3ED !important;
+}
+.bp-nav-tabs .v-tabs-slider {
+  background: #63B3ED !important;
+}
+
+/* ── v-list items blueprint ── */
+.v-list-item-title {
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+.v-list-item-subtitle {
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }

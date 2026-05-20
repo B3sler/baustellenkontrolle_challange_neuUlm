@@ -8,18 +8,24 @@ export default createVuetify({
   components,
   directives,
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'blueprint',
     themes: {
-      light: {
+      blueprint: {
+        dark: false,
         colors: {
-          primary: '#1565C0',
-          'primary-darken-1': '#0D47A1',
-          secondary: '#42A5F5',
-          error: '#D32F2F',
-          warning: '#F57F17',
-          success: '#2E7D32',
+          background: '#F8FAFC',
           surface: '#FFFFFF',
-          background: '#F5F5F5',
+          primary: '#2563EB',
+          secondary: '#63B3ED',
+          error: '#EF4444',
+          warning: '#F59E0B',
+          success: '#22C55E',
+          info: '#0EA5E9',
+          'on-background': '#0F172A',
+          'on-surface': '#0F172A',
+          'on-primary': '#FFFFFF',
+          'surface-variant': '#F1F5F9',
+          'on-surface-variant': '#64748B',
         },
       },
     },
