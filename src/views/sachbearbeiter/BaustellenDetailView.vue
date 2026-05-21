@@ -391,7 +391,7 @@ function addDummyBild() {
   const bild: Bild = {
     id: `bild-${Date.now()}`,
     baustellenId: id,
-    url: `https://picsum.photos/seed/${Date.now()}/400/300`,
+    url: `https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&auto=format&t=${Date.now()}`,
     beschreibung: 'Neues Foto',
     hochgeladenVon: 'bauleiter',
     hochgeladenAm: new Date().toISOString().split('T')[0],
