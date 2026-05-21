@@ -25,35 +25,18 @@
     </div>
 
     <!-- Role switcher -->
-    <div class="pn-role-wrap">
-      <v-menu :close-on-content-click="true">
-        <template #activator="{ props }">
-          <button v-bind="props" class="pn-role-btn">
-            <div class="pn-role-avatar">{{ roleInitials }}</div>
-            <span class="pn-role-label">{{ roleLabel }}</span>
-            <v-icon size="13" color="#94A3B8">mdi-chevron-down</v-icon>
-          </button>
-        </template>
-        <v-list class="pn-role-menu" density="compact" :elevation="8">
-          <div class="pn-menu-header">Rolle wechseln</div>
-          <v-list-item
-            v-for="option in roleOptions"
-            :key="option.value"
-            :active="roleStore.currentRole === option.value"
-            active-color="primary"
-            rounded="lg"
-            @click="switchRole(option.value)"
-          >
-            <template #prepend>
-              <div class="pn-menu-icon">
-                <v-icon size="15">{{ option.icon }}</v-icon>
-              </div>
-            </template>
-            <v-list-item-title class="pn-menu-item-title">{{ option.label }}</v-list-item-title>
-            <v-list-item-subtitle class="pn-menu-item-sub">{{ option.desc }}</v-list-item-subtitle>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+    <div class="pn-seg">
+      <button
+        v-for="option in roleOptions"
+        :key="option.value"
+        class="pn-seg-btn"
+        :class="{ 'pn-seg-btn--active': roleStore.currentRole === option.value }"
+        @click="switchRole(option.value)"
+      >
+        <span class="pn-seg-dot" :style="{ background: option.color }"></span>
+        <v-icon size="13" class="pn-seg-icon">{{ option.icon }}</v-icon>
+        {{ option.label }}
+      </button>
     </div>
   </nav>
 </template>
@@ -97,16 +80,10 @@ function isActive(tabPath: string) {
 }
 
 const roleOptions = [
-  { value: 'sachbearbeiter' as Role, label: 'Sachbearbeiter:in', icon: 'mdi-briefcase-outline', desc: 'Stadt · Vollzugriff' },
-  { value: 'bauleiter' as Role, label: 'Bauleiter:in', icon: 'mdi-hard-hat', desc: 'Bauleitung · Eigene Baustellen' },
-  { value: 'passant' as Role, label: 'Passant:in', icon: 'mdi-walk', desc: 'Bürger:in · Meldungen' },
+  { value: 'sachbearbeiter' as Role, label: 'Sachbearbeiter:in', icon: 'mdi-briefcase-outline', color: '#2563EB' },
+  { value: 'bauleiter' as Role, label: 'Bauleiter:in', icon: 'mdi-hard-hat', color: '#D97706' },
+  { value: 'passant' as Role, label: 'Passant:in', icon: 'mdi-walk', color: '#16A34A' },
 ]
-
-const roleLabel = computed(() => roleOptions.find(o => o.value === roleStore.currentRole)?.label ?? '')
-const roleInitials = computed(() => {
-  const map: Record<Role, string> = { sachbearbeiter: 'SB', bauleiter: 'BL', passant: 'PA' }
-  return map[roleStore.currentRole]
-})
 
 const defaultRoutes: Record<Role, string> = {
   sachbearbeiter: '/sb/karte',
@@ -197,92 +174,66 @@ function switchRole(role: Role) {
   opacity: 0.8;
 }
 
-/* Role switcher */
-.pn-role-wrap {
-  flex-shrink: 0;
-  margin-left: 4px;
-}
-
-.pn-role-btn {
+/* Role switcher – segmented control */
+.pn-seg {
   display: flex;
   align-items: center;
-  gap: 7px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 40px;
-  padding: 4px 12px 4px 4px;
+  background: #F1F5F9;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.pn-seg-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748B;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  transition: background 0.14s, color 0.14s, box-shadow 0.14s;
   outline: none;
 }
-.pn-role-btn:hover {
-  border-color: #93C5FD;
-  background: #EFF6FF;
+
+.pn-seg-btn:hover:not(.pn-seg-btn--active) {
+  background: #E8EDF3;
+  color: #334155;
 }
 
-.pn-role-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #08122B, #2563EB);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 8.5px;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 0.02em;
-  flex-shrink: 0;
-}
-
-.pn-role-label {
-  font-family: 'Barlow', sans-serif;
-  font-size: 12.5px;
-  font-weight: 600;
+.pn-seg-btn--active {
+  background: #ffffff;
   color: #0F172A;
-  white-space: nowrap;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0,0,0,0.04);
 }
 
-/* Role dropdown menu */
-.pn-role-menu {
-  border-radius: 12px !important;
-  border: 1px solid #E2E8F0 !important;
-  padding: 6px !important;
-  min-width: 220px;
+.pn-seg-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.14s;
 }
 
-.pn-menu-header {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #94A3B8;
-  padding: 4px 12px 8px;
+.pn-seg-btn--active .pn-seg-dot {
+  opacity: 1;
 }
 
-.pn-menu-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  background: #F1F5F9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 4px;
+.pn-seg-icon {
+  opacity: 0.6;
+  transition: opacity 0.14s;
 }
 
-.pn-menu-item-title {
-  font-family: 'Barlow', sans-serif !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #0F172A !important;
-}
-
-.pn-menu-item-sub {
-  font-family: 'IBM Plex Mono', monospace !important;
-  font-size: 9.5px !important;
-  color: #94A3B8 !important;
-  letter-spacing: 0.02em !important;
+.pn-seg-btn--active .pn-seg-icon {
+  opacity: 1;
 }
 </style>
