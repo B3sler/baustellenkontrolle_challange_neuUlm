@@ -51,7 +51,7 @@ import { ref, onMounted } from 'vue'
 import PillNav from './components/PillNav.vue'
 
 const SESSION_KEY = 'neubautulm_auth'
-const CORRECT_PW = 'DemoKanu2026'
+const CORRECT_PW = import.meta.env.VITE_GATE_PASSWORD as string
 
 const authenticated = ref(false)
 const password = ref('')
