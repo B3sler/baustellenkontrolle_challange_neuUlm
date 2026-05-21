@@ -72,6 +72,7 @@ const tabsByRole = {
     { to: '/sb/baustellen', label: 'Baustellen', icon: 'mdi-road-variant' },
     { to: '/sb/maengel', label: 'Mängel', icon: 'mdi-alert-circle-outline' },
     { to: '/sb/karte', label: 'Karte', icon: 'mdi-map-outline' },
+    { to: '/sb/kontrollen', label: 'Kontrollen', icon: 'mdi-map-check-outline' },
   ],
   bauleiter: [
     { to: '/bl/projects', label: 'Meine Baustellen', icon: 'mdi-hard-hat' },
@@ -108,7 +109,7 @@ const roleInitials = computed(() => {
 })
 
 const defaultRoutes: Record<Role, string> = {
-  sachbearbeiter: '/sb/baustellen',
+  sachbearbeiter: '/sb/karte',
   bauleiter: '/bl/projects',
   passant: '/pa/report',
 }
@@ -143,7 +144,7 @@ function switchRole(role: Role) {
 }
 
 .pn-logo-name {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: #08122B;
@@ -168,7 +169,7 @@ function switchRole(role: Role) {
   border-radius: 40px;
   border: none;
   background: transparent;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #64748B;
@@ -227,7 +228,7 @@ function switchRole(role: Role) {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 8.5px;
   font-weight: 500;
   color: #fff;
@@ -236,7 +237,7 @@ function switchRole(role: Role) {
 }
 
 .pn-role-label {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   color: #0F172A;
@@ -252,7 +253,7 @@ function switchRole(role: Role) {
 }
 
 .pn-menu-header {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -272,14 +273,14 @@ function switchRole(role: Role) {
 }
 
 .pn-menu-item-title {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   color: #0F172A !important;
 }
 
 .pn-menu-item-sub {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: 'IBM Plex Mono', monospace !important;
   font-size: 9.5px !important;
   color: #94A3B8 !important;
   letter-spacing: 0.02em !important;

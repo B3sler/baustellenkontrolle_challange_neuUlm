@@ -142,7 +142,7 @@ function submit() {
   border: 1px solid #FDE68A;
   border-radius: 8px;
   color: #92400E;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   transition: all 0.2s;
 }
@@ -184,7 +184,7 @@ function submit() {
 }
 
 .df-cancel-btn {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #64748B;
@@ -201,7 +201,7 @@ function submit() {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #fff;

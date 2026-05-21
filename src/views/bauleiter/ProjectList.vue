@@ -89,7 +89,7 @@ const meineBaustellen = computed(() =>
 const kpiOffen = computed(() => meineBaustellen.value.filter(b => b.status === 'offen').length)
 const kpiInPruefung = computed(() => meineBaustellen.value.filter(b => b.status === 'in_pruefung').length)
 const kpiMaengel = computed(() =>
-  meineBaustellen.value.reduce((sum, b) => sum + maengelStore.getMaengelForBaustelle(b.id).filter(m => m.status === 'offen').length, 0)
+  meineBaustellen.value.reduce((sum, b) => sum + maengelStore.getMaengelForBaustelle(b.id).filter(m => m.status === 'gemeldet').length, 0)
 )
 
 function statusLabel(s: BaustellenStatus) {
@@ -161,7 +161,7 @@ function statusLabel(s: BaustellenStatus) {
 }
 
 .pl-card-name {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #0F172A;
@@ -173,7 +173,7 @@ function statusLabel(s: BaustellenStatus) {
 }
 
 .pl-card-addr {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   color: #64748B;
   display: flex;
@@ -196,7 +196,7 @@ function statusLabel(s: BaustellenStatus) {
 }
 
 .pl-maengel-badge {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9.5px;
   background: #FEF2F2;
   color: #EF4444;

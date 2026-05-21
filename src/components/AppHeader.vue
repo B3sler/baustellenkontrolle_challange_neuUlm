@@ -47,7 +47,7 @@ import RoleSwitch from './RoleSwitch.vue'
 }
 
 .bp-brand-name {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 17px;
   font-weight: 700;
   color: #FFFFFF;
@@ -55,7 +55,7 @@ import RoleSwitch from './RoleSwitch.vue'
 }
 
 .bp-brand-sub {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   font-weight: 400;
   color: rgba(99, 179, 237, 0.7);

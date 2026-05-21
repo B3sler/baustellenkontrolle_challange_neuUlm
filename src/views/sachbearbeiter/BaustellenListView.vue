@@ -148,7 +148,7 @@ const filteredBaustellen = computed(() =>
 const kpiOffen = computed(() => store.baustellen.filter(b => b.status === 'offen').length)
 const kpiInPruefung = computed(() => store.baustellen.filter(b => b.status === 'in_pruefung').length)
 const kpiAbgeschlossen = computed(() => store.baustellen.filter(b => b.status === 'abgeschlossen').length)
-const kpiMaengel = computed(() => maengelStore.maengel.filter(m => m.status === 'offen').length)
+const kpiMaengel = computed(() => maengelStore.maengel.filter(m => m.status === 'gemeldet').length)
 
 function openDetail(id: string) {
   router.push(`/sb/baustellen/${id}`)
@@ -227,7 +227,7 @@ function statusLabel(s: BaustellenStatus) {
   background: #FEF2F2;
   color: #EF4444;
   border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   font-weight: 600;
 }

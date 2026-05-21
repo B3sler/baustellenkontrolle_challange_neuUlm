@@ -56,8 +56,8 @@ describe('maengelStore', () => {
 
   it('updates mangel status', () => {
     const store = useMaengelStore()
-    store.updateStatus('mg-1', 'erledigt')
-    expect(store.maengel.find(m => m.id === 'mg-1')?.status).toBe('erledigt')
+    store.updateStatus('mg-1', 'abgeschlossen')
+    expect(store.maengel.find(m => m.id === 'mg-1')?.status).toBe('abgeschlossen')
   })
 
   it('filters by baustellenId', () => {

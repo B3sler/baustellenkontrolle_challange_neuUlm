@@ -85,7 +85,7 @@ function onSubmit(data: { kategorie: string; beschreibung: string; lat: number; 
     baustellenId: 'bs-1',
     kategorie: data.kategorie,
     beschreibung: data.beschreibung,
-    status: 'offen',
+    status: 'gemeldet',
     lat: data.lat,
     lng: data.lng,
     erstelltAm: new Date().toISOString().split('T')[0],
@@ -100,7 +100,7 @@ function onCancel() {
 }
 
 function markerColor(status: MaengelStatus) {
-  return { offen: '#EF4444', in_bearbeitung: '#3B82F6', erledigt: '#22C55E' }[status]
+  return { gemeldet: '#F59E0B', in_bearbeitung: '#3B82F6', ueberprueft: '#8B5CF6', abgemahnt: '#EF4444', abgeschlossen: '#22C55E' }[status]
 }
 </script>
 
@@ -127,7 +127,7 @@ function markerColor(status: MaengelStatus) {
   background: rgba(8, 18, 43, 0.82);
   backdrop-filter: blur(8px);
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   font-weight: 500;
   padding: 8px 16px;
@@ -146,7 +146,7 @@ function markerColor(status: MaengelStatus) {
   gap: 8px;
   background: #2563EB;
   color: #fff;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 600;
   border: none;

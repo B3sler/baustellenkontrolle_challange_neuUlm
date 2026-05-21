@@ -8,16 +8,16 @@
           <div class="bp-kpi-label">Gesamt</div>
         </div>
         <div class="bp-kpi-block">
-          <div class="bp-kpi-value" style="color:#F59E0B">{{ kpiOffen }}</div>
-          <div class="bp-kpi-label">Offen</div>
+          <div class="bp-kpi-value" style="color:#F59E0B">{{ kpiGemeldet }}</div>
+          <div class="bp-kpi-label">Gemeldet</div>
         </div>
         <div class="bp-kpi-block">
           <div class="bp-kpi-value" style="color:#3B82F6">{{ kpiInBearbeitung }}</div>
           <div class="bp-kpi-label">In Bearbeitung</div>
         </div>
         <div class="bp-kpi-block">
-          <div class="bp-kpi-value" style="color:#22C55E">{{ kpiErledigt }}</div>
-          <div class="bp-kpi-label">Erledigt</div>
+          <div class="bp-kpi-value" style="color:#22C55E">{{ kpiAbgeschlossen }}</div>
+          <div class="bp-kpi-label">Abgeschlossen</div>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
         :items="filteredMaengel"
         item-value="id"
         hover
-        @click:row="(_: any, { item }: any) => goToDetail(item.baustellenId)"
+        @click:row="(_: any, { item }: any) => goToDetail(item.id)"
       >
         <template #item.beschreibung="{ item }">
           <div class="ml-desc-cell">
@@ -94,9 +94,11 @@ const filterStatus = ref<MaengelStatus | null>(null)
 const filterKategorie = ref<string | null>(null)
 
 const statusOptions = [
-  { title: 'Offen', value: 'offen' },
+  { title: 'Gemeldet', value: 'gemeldet' },
   { title: 'In Bearbeitung', value: 'in_bearbeitung' },
-  { title: 'Erledigt', value: 'erledigt' },
+  { title: 'Überprüft', value: 'ueberprueft' },
+  { title: 'Abgemahnt', value: 'abgemahnt' },
+  { title: 'Abgeschlossen', value: 'abgeschlossen' },
 ]
 
 const kategorien = computed(() =>
@@ -118,20 +120,20 @@ const filteredMaengel = computed(() =>
   })
 )
 
-const kpiOffen = computed(() => maengelStore.maengel.filter(m => m.status === 'offen').length)
+const kpiGemeldet = computed(() => maengelStore.maengel.filter(m => m.status === 'gemeldet').length)
 const kpiInBearbeitung = computed(() => maengelStore.maengel.filter(m => m.status === 'in_bearbeitung').length)
-const kpiErledigt = computed(() => maengelStore.maengel.filter(m => m.status === 'erledigt').length)
+const kpiAbgeschlossen = computed(() => maengelStore.maengel.filter(m => m.status === 'abgeschlossen').length)
 
 function baustelleName(id: string) {
   return baustellenStore.baustellen.find(b => b.id === id)?.name ?? id
 }
 
-function goToDetail(baustellenId: string) {
-  router.push(`/sb/baustellen/${baustellenId}?tab=maengel`)
+function goToDetail(mangelId: string) {
+  router.push(`/sb/maengel/${mangelId}`)
 }
 
 function statusLabel(s: MaengelStatus) {
-  return { offen: 'Offen', in_bearbeitung: 'In Bearbeitung', erledigt: 'Erledigt' }[s]
+  return { gemeldet: 'Gemeldet', in_bearbeitung: 'In Bearbeitung', ueberprueft: 'Überprüft', abgemahnt: 'Abgemahnt', abgeschlossen: 'Abgeschlossen' }[s]
 }
 </script>
 
@@ -190,7 +192,7 @@ function statusLabel(s: MaengelStatus) {
 }
 
 .ml-baustelle-name {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   font-weight: 500;
   color: #2563EB;

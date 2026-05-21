@@ -1,5 +1,5 @@
 export type BaustellenStatus = 'offen' | 'in_pruefung' | 'abgeschlossen'
-export type MaengelStatus = 'offen' | 'in_bearbeitung' | 'erledigt'
+export type MaengelStatus = 'gemeldet' | 'in_bearbeitung' | 'ueberprueft' | 'abgemahnt' | 'abgeschlossen'
 export type Prioritaet = 'hoch' | 'mittel' | 'niedrig'
 
 export interface Baustelle {
@@ -25,6 +25,13 @@ export interface Baustelle {
   beschreibung: string
 }
 
+export interface Kommentar {
+  id: string
+  text: string
+  verfasserRolle: 'bauleiter' | 'sachbearbeiter'
+  erstelltAm: string
+}
+
 export interface Mangel {
   id: string
   baustellenId: string
@@ -34,6 +41,7 @@ export interface Mangel {
   lat: number
   lng: number
   erstelltAm: string
+  kommentare?: Kommentar[]
 }
 
 export interface Dokument {

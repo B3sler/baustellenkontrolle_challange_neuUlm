@@ -13,16 +13,16 @@
           <div class="bp-kpi-label">Gesamt</div>
         </div>
         <div class="bp-kpi-block">
-          <div class="bp-kpi-value" style="color:#F59E0B">{{ kpiOffen }}</div>
-          <div class="bp-kpi-label">Offen</div>
+          <div class="bp-kpi-value" style="color:#F59E0B">{{ kpiGemeldet }}</div>
+          <div class="bp-kpi-label">Gemeldet</div>
         </div>
         <div class="bp-kpi-block">
           <div class="bp-kpi-value" style="color:#3B82F6">{{ kpiBearbeitung }}</div>
           <div class="bp-kpi-label">In Bearbeitung</div>
         </div>
         <div class="bp-kpi-block">
-          <div class="bp-kpi-value" style="color:#22C55E">{{ kpiErledigt }}</div>
-          <div class="bp-kpi-label">Erledigt</div>
+          <div class="bp-kpi-value" style="color:#22C55E">{{ kpiAbgeschlossen }}</div>
+          <div class="bp-kpi-label">Abgeschlossen</div>
         </div>
       </div>
     </div>
@@ -77,12 +77,12 @@ const meldungen = computed(() =>
   maengelStore.maengel.filter(m => m.id.startsWith('mg-p-') || m.id === 'mg-1' || m.id === 'mg-4')
 )
 
-const kpiOffen = computed(() => meldungen.value.filter(m => m.status === 'offen').length)
+const kpiGemeldet = computed(() => meldungen.value.filter(m => m.status === 'gemeldet').length)
 const kpiBearbeitung = computed(() => meldungen.value.filter(m => m.status === 'in_bearbeitung').length)
-const kpiErledigt = computed(() => meldungen.value.filter(m => m.status === 'erledigt').length)
+const kpiAbgeschlossen = computed(() => meldungen.value.filter(m => m.status === 'abgeschlossen').length)
 
 function statusLabel(s: MaengelStatus) {
-  return { offen: 'Offen', in_bearbeitung: 'In Bearbeitung', erledigt: 'Erledigt' }[s]
+  return { gemeldet: 'Gemeldet', in_bearbeitung: 'In Bearbeitung', ueberprueft: 'Überprüft', abgemahnt: 'Abgemahnt', abgeschlossen: 'Abgeschlossen' }[s]
 }
 </script>
 
@@ -165,7 +165,7 @@ function statusLabel(s: MaengelStatus) {
 }
 
 .mv-item-desc {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #0F172A;
@@ -187,7 +187,7 @@ function statusLabel(s: MaengelStatus) {
 }
 
 .mv-map-link {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   color: #63B3ED;
   background: none;

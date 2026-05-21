@@ -14,8 +14,8 @@ NeuBautUlm bildet drei Nutzerrollen ab, die jeweils eigene Ansichten und Berecht
 
 | Rolle | Beschreibung |
 |---|---|
-| **Sachbearbeiter:in** | Zentrale Verwaltung aller Baustellen und Mängel, Statusbearbeitung, Kartenübersicht |
-| **Bauleiter:in** | Eigene Baustellen einsehen, Dokumente und Fotos hochladen (Mock) |
+| **Sachbearbeiter:in** | Zentrale Verwaltung aller Baustellen und Mängel, Routenplanung, Statusbearbeitung, Kartenübersicht |
+| **Bauleiter:in** | Eigene Baustellen einsehen, Kommentare zu Mängeln abgeben, Dokumente und Fotos hochladen |
 | **Passant:in** | Mängel im öffentlichen Raum auf der Karte melden |
 
 Der Rollenwechsel erfolgt direkt über die Navigationsleiste — keine Authentifizierung erforderlich.
@@ -25,26 +25,47 @@ Der Rollenwechsel erfolgt direkt über die Navigationsleiste — keine Authentif
 ## Features
 
 ### Sachbearbeiter:in
-- **Baustellenliste** mit Filter nach Status und Priorität sowie Freitextsuche
-- **Mängelliste** über alle Baustellen mit Status- und Kategoriefilter
-- **Kartenansicht** (OpenStreetMap) mit farbcodierten Markern für Baustellen und Mängel
-- **Baustellendetail** mit:
-  - Stammdaten (Firma, Ansprechpartner, Genehmigungsnummer, Auftragswert)
-  - Kartenausschnitt + Verlaufs-Timeline
-  - Mängelliste mit Statusbearbeitung (Dropdown)
+- **Karte** (Startansicht) — OpenStreetMap mit farbcodierten Markern für alle Baustellen und Mängel, Klick öffnet Detailpopup mit Direktlink
+- **Baustellenliste** — Filter nach Status und Priorität, Freitextsuche, Klick öffnet Detailseite
+- **Mängelliste** — alle Mängel aller Baustellen, Status- und Kategoriefilter, Klick öffnet Mangel-Detailseite
+- **Baustellendetail** mit vier Bereichen:
+  - Stammdaten (Firma, Ansprechpartner, Telefon, E-Mail, Genehmigungsnummer, Auftragswert, Beschreibung)
+  - Kartenausschnitt + Verlaufs-Timeline (no-scroll Layout)
+  - Mängelliste der Baustelle mit Klick auf Mangel-Detailseite
   - Dokumenten- und Bildergalerie (read-only)
-- Baustellenstatus ändern (Offen → In Prüfung → Abgeschlossen)
+- **Mangel-Detailseite** — Stammdaten, Kommentarverlauf (Bauleiter/Sachbearbeiter farblich getrennt), Kommentar hinzufügen, Status per Dropdown ändern, „Als abgeschlossen markieren"-Button
+- **Baustellenkontrollen** — intelligente Routenplanung:
+  - Beliebige Baustellen per Checkbox auswählen
+  - Nearest-Neighbor-Algorithmus berechnet optimale Route ab Rathaus Neu-Ulm
+  - Anzeige: Gesamtstrecke (km), Fahrzeit, Kontrollzeit pro Stop (15 Min Basis + 8 Min pro offenem Mangel), Gesamtdauer
+  - Nummerierte Route als gestrichelte Polylinie auf der Karte
 
 ### Bauleiter:in
-- Liste der eigenen Baustellen
-- Dokumente hochladen (Dummy-Eintrag wird im Store angelegt)
-- Fotos hinzufügen (zufälliges Platzhalterbild via picsum.photos)
+- Liste der eigenen Baustellen mit Statusübersicht
+- Baustellendetail mit Dokumenten- und Foto-Upload (Mock)
+- **Mängel kommentieren** — Kommentar-Eingabe auf jeder Mangel-Detailseite, Kommentare erscheinen sofort im Verlauf für Sachbearbeiter sichtbar
 
 ### Passant:in
 - Vollbild-Karte mit allen gemeldeten Mängeln (farbcodiert nach Status)
 - Mangel melden: Klick auf Karte → Position übernehmen → Formular ausfüllen → absenden
-- Meldungsliste mit eigenen Einträgen
+- Meldungsliste mit eigenen Einträgen und Statusanzeige
 - Separate Kartenansicht aller Mängel
+
+---
+
+## Mängel-Workflow
+
+Mängel durchlaufen einen klar definierten 5-stufigen Status-Workflow:
+
+| Status | Farbe | Bedeutung |
+|---|---|---|
+| **Gemeldet** | Amber | Mangel wurde eingereicht (Passant oder Bauleiter) |
+| **In Bearbeitung** | Blau | Sachbearbeiter hat Bearbeitung aufgenommen |
+| **Überprüft** | Lila | Mangel wurde vor Ort geprüft und bestätigt |
+| **Abgemahnt** | Rot | Formelle Abmahnung an Auftragnehmer ausgesprochen |
+| **Abgeschlossen** | Grün | Mangel vollständig behoben und dokumentiert |
+
+Bauleiter können zu jedem Mangel Kommentare hinterlassen. Sachbearbeiter sehen alle Kommentare und können den Status jederzeit anpassen.
 
 ---
 
@@ -63,7 +84,7 @@ Der Rollenwechsel erfolgt direkt über die Navigationsleiste — keine Authentif
 | CI/CD | GitHub Actions → GitHub Pages |
 
 ### Design System (A2 Blueprint)
-- **Schriften:** Bricolage Grotesque (Überschriften) · DM Sans (Fließtext) · JetBrains Mono (Daten/Labels)
+- **Schriften:** Barlow Semi Condensed (Überschriften/KPIs) · Barlow (Fließtext/Buttons) · IBM Plex Mono (Daten/Labels/Badges)
 - **Farben:** Slate-Palette mit Blau (#2563EB) als Primärfarbe
 - Globale Design-Tokens in `src/styles/blueprint.css`
 
@@ -80,10 +101,12 @@ src/
 │   └── SidebarFilters.vue   # Filterleiste für die Sachbearbeiter-Karte
 ├── views/
 │   ├── sachbearbeiter/
+│   │   ├── KarteView.vue            # Tab: Karte (Startansicht)
 │   │   ├── BaustellenListView.vue   # Tab: Baustellen
-│   │   ├── BaustellenDetailView.vue # Detailseite mit Sub-Tabs
+│   │   ├── BaustellenDetailView.vue # Detailseite (Stammdaten, Mängel, Dokumente)
 │   │   ├── MaengelListView.vue      # Tab: Mängel
-│   │   └── KarteView.vue            # Tab: Karte
+│   │   ├── MangelDetailView.vue     # Mangel-Detail mit Kommentarverlauf
+│   │   └── KontrollenView.vue       # Tab: Baustellenkontrollen + Routenplanung
 │   ├── bauleiter/
 │   │   ├── ProjectList.vue          # Tab: Meine Baustellen
 │   │   ├── ProjectDetail.vue        # Baustellendetail (Upload-Buttons)
@@ -95,12 +118,12 @@ src/
 │       └── AnleitungView.vue        # Platzhalter
 ├── stores/
 │   ├── baustellenStore.ts   # Baustellen, Dokumente, Bilder
-│   ├── maengelStore.ts      # Mängel + Statusänderungen
+│   ├── maengelStore.ts      # Mängel, Statusänderungen, Kommentare
 │   └── roleStore.ts         # Aktive Rolle (sachbearbeiter / bauleiter / passant)
 ├── data/
-│   └── mockData.ts          # Alle Mock-Daten (6 Baustellen, Mängel, Dokumente, Bilder)
+│   └── mockData.ts          # Alle Mock-Daten (12 Baustellen, 22 Mängel, Kommentare)
 ├── types/
-│   └── types.ts             # TypeScript-Interfaces (Baustelle, Mangel, Dokument, Bild)
+│   └── types.ts             # TypeScript-Interfaces (Baustelle, Mangel, Kommentar, Dokument, Bild)
 ├── router/
 │   └── index.ts             # Vue Router mit allen Routen
 └── styles/
@@ -138,14 +161,22 @@ interface Mangel {
   baustellenId: string
   kategorie: string
   beschreibung: string
-  status: 'offen' | 'in_bearbeitung' | 'erledigt'
+  status: 'gemeldet' | 'in_bearbeitung' | 'ueberprueft' | 'abgemahnt' | 'abgeschlossen'
   lat: number
   lng: number
+  erstelltAm: string
+  kommentare?: Kommentar[]
+}
+
+interface Kommentar {
+  id: string
+  text: string
+  verfasserRolle: 'bauleiter' | 'sachbearbeiter'
   erstelltAm: string
 }
 ```
 
-Alle Daten leben ausschließlich im Pinia-Store (initialisiert aus `mockData.ts`). Änderungen (Statuswechsel, neue Mängel, neue Dokumente) sind nur im Frontend-State — kein Backend, kein LocalStorage.
+Alle Daten leben ausschließlich im Pinia-Store (initialisiert aus `mockData.ts`). Änderungen (Statuswechsel, neue Mängel, neue Kommentare, neue Dokumente) sind nur im Frontend-State — kein Backend, kein LocalStorage.
 
 ---
 
@@ -199,18 +230,24 @@ Voraussetzung: Im Repository unter `Settings → Pages → Source: GitHub Action
 
 ## Mock-Daten
 
-Die App enthält 6 realistische Baustellen in Neu-Ulm:
+Die App enthält 12 realistische Baustellen in Neu-Ulm mit insgesamt 22 Mängeln:
 
 | ID | Name | Firma | Status |
 |---|---|---|---|
-| bs-1 | Straßensanierung Augsburger Str. | Strabag AG | In Prüfung |
-| bs-2 | Kanalarbeiten Innenstadt | Leonhard Weiss | Offen |
-| bs-3 | Gehwegerneuerung Wileystr. | Max Bögl | Abgeschlossen |
-| bs-4 | Brückenreparatur B10 | Eurovia | Offen |
-| bs-5 | Neubau Kreisverkehr Ludwigsfeld | Züblin AG | In Prüfung |
-| bs-6 | Parkplatzsanierung Rathaus | Johann Bunte | Offen |
+| bs-1 | Bahnhofsplatz Sanierung | Strabag AG | Offen |
+| bs-2 | Innenstadt Tiefbau Schillerstraße | Leonhard Weiss | In Prüfung |
+| bs-3 | Wileystraße Kanalsanierung | Max Bögl | Offen |
+| bs-4 | Ringstraße Asphaltierung | Eurovia | Abgeschlossen |
+| bs-5 | Industriestraße Brückensanierung | Züblin AG | In Prüfung |
+| bs-6 | Ludwigsplatz Pflasterung | Johann Bunte | Offen |
+| bs-7 | Europastraße Fahrbahnmarkierung | Swarco | Offen |
+| bs-8 | Gärtnerstraße Gehwegsanierung | Max Bögl | In Prüfung |
+| bs-9 | Stadtpark Wegenetz Erneuerung | Johann Bunte | Abgeschlossen |
+| bs-10 | Memminger Straße Leitungsverlegung | Leonhard Weiss | Offen |
+| bs-11 | Silcherstraße Kreuzungsumbau | Strabag AG | In Prüfung |
+| bs-12 | Donauufer Promenade Sanierung | Eurovia | Offen |
 
-Jede Baustelle enthält automatisch einen **Antrag** und eine **Verkehrsrechtliche Anordnung (VRA)** als Pflichtdokumente.
+Jede Baustelle enthält automatisch einen **Antrag** und eine **Verkehrsrechtliche Anordnung (VRA)** als Pflichtdokumente. Ausgewählte Mängel haben bereits einen Kommentarverlauf als Beispieldaten.
 
 ---
 
@@ -219,6 +256,7 @@ Jede Baustelle enthält automatisch einen **Antrag** und eine **Verkehrsrechtlic
 - Kein echtes Backend / keine Persistenz — alle Daten gehen beim Reload verloren
 - Kein echter Datei-Upload — Dokumente und Bilder sind nur Dummy-Einträge
 - Kein Login / keine echte Rollentrennung — Rollenwechsel ist nur ein UI-Toggle
+- Routenplanung verwendet Haversine-Distanz (Luftlinie), keine echten Straßendistanzen
 - Kartenmarker verwenden feste Mock-Koordinaten in der Nähe von Neu-Ulm
 - Nur Desktop optimiert — Mobile-Feintuning ist für eine spätere Version geplant
 

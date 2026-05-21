@@ -100,10 +100,10 @@ function baustelleRingColor(status: BaustellenStatus) {
   return { offen: '#D97706', in_pruefung: '#7C3AED', abgeschlossen: '#16A34A' }[status]
 }
 function maengelColor(status: MaengelStatus) {
-  return { offen: '#EF4444', in_bearbeitung: '#3B82F6', erledigt: '#22C55E' }[status]
+  return { gemeldet: '#F59E0B', in_bearbeitung: '#3B82F6', ueberprueft: '#8B5CF6', abgemahnt: '#EF4444', abgeschlossen: '#22C55E' }[status]
 }
 function maengelStatusLabel(status: MaengelStatus) {
-  return { offen: 'Offen', in_bearbeitung: 'In Bearbeitung', erledigt: 'Erledigt' }[status]
+  return { gemeldet: 'Gemeldet', in_bearbeitung: 'In Bearbeitung', ueberprueft: 'Überprüft', abgemahnt: 'Abgemahnt', abgeschlossen: 'Abgeschlossen' }[status]
 }
 function baustelleStatusLabel(status: BaustellenStatus) {
   return { offen: 'Offen', in_pruefung: 'In Prüfung', abgeschlossen: 'Abgeschlossen' }[status]
@@ -113,7 +113,7 @@ function baustelleStatusLabel(status: BaustellenStatus) {
 <style>
 /* ── Leaflet UI: match site style ── */
 .leaflet-control-zoom a {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   background: #ffffff !important;
   color: #64748B !important;
   border-color: #E2E8F0 !important;
@@ -124,7 +124,7 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   color: #0F172A !important;
 }
 .leaflet-control-attribution {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: 'IBM Plex Mono', monospace !important;
   font-size: 9px !important;
   background: rgba(255, 255, 255, 0.85) !important;
   color: #94A3B8 !important;
@@ -152,7 +152,7 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   box-shadow: none !important;
 }
 .leaflet-popup-close-button {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   color: #94A3B8 !important;
   top: 8px !important;
   right: 10px !important;
@@ -164,13 +164,13 @@ function baustelleStatusLabel(status: BaustellenStatus) {
 
 /* ── Popup content — project fonts ── */
 .map-popup {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   min-width: 190px;
   padding: 14px 16px;
 }
 .map-popup-tag {
   display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 8px;
   font-weight: 500;
   text-transform: uppercase;
@@ -188,7 +188,7 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   color: #DC2626;
 }
 .map-popup-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #0F172A;
@@ -197,7 +197,7 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   letter-spacing: -0.01em;
 }
 .map-popup-addr {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 11.5px;
   color: #64748B;
   margin-bottom: 8px;
@@ -216,14 +216,14 @@ function baustelleStatusLabel(status: BaustellenStatus) {
   flex-shrink: 0;
 }
 .map-popup-status {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   color: #64748B;
   letter-spacing: 0.03em;
 }
 .map-popup-link {
   display: block;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   color: #2563EB;

@@ -91,7 +91,7 @@ function switchRole(role: Role) {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   font-weight: 500;
   color: #fff;
@@ -107,7 +107,7 @@ function switchRole(role: Role) {
 }
 
 .bp-role-label {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
@@ -116,7 +116,7 @@ function switchRole(role: Role) {
 }
 
 .bp-role-hint {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 8.5px;
   color: rgba(99, 179, 237, 0.6);
   letter-spacing: 0.05em;
@@ -132,7 +132,7 @@ function switchRole(role: Role) {
 }
 
 .bp-menu-header {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -152,14 +152,14 @@ function switchRole(role: Role) {
 }
 
 .bp-menu-item-title {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   color: #0F172A !important;
 }
 
 .bp-menu-item-sub {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: 'IBM Plex Mono', monospace !important;
   font-size: 9.5px !important;
   color: #94A3B8 !important;
   letter-spacing: 0.02em !important;

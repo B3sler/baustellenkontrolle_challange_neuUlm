@@ -66,7 +66,7 @@ watch(() => route.path, (path) => {
 }
 
 .bp-tab {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   font-size: 12.5px !important;
   font-weight: 500 !important;
   text-transform: none !important;

@@ -135,7 +135,7 @@ defineExpose({ show })
 }
 
 .sf-toggle-label {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   color: #0F172A;
@@ -196,7 +196,7 @@ defineExpose({ show })
 }
 
 .sf-item-name {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: #0F172A;

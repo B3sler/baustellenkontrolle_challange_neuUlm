@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
-    { path: '/', redirect: '/sb/baustellen' },
+    { path: '/', redirect: '/sb/karte' },
 
     // Sachbearbeiter
     {
@@ -19,8 +19,16 @@ const router = createRouter({
       component: () => import('../views/sachbearbeiter/MaengelListView.vue'),
     },
     {
+      path: '/sb/maengel/:id',
+      component: () => import('../views/sachbearbeiter/MangelDetailView.vue'),
+    },
+    {
       path: '/sb/karte',
       component: () => import('../views/sachbearbeiter/KarteView.vue'),
+    },
+    {
+      path: '/sb/kontrollen',
+      component: () => import('../views/sachbearbeiter/KontrollenView.vue'),
     },
 
     // Bauleiter
@@ -31,6 +39,10 @@ const router = createRouter({
     {
       path: '/bl/projects/:id',
       component: () => import('../views/bauleiter/ProjectDetail.vue'),
+    },
+    {
+      path: '/bl/maengel/:id',
+      component: () => import('../views/sachbearbeiter/MangelDetailView.vue'),
     },
     {
       path: '/bl/anleitung',

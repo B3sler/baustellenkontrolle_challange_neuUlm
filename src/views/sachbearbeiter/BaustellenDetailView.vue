@@ -3,37 +3,33 @@
     <!-- Page Header -->
     <div class="bv-page-header">
       <button class="bv-back-btn" @click="router.back()">
-        <v-icon size="16">mdi-arrow-left</v-icon>
-        Zurück
+        <v-icon size="18">mdi-arrow-left</v-icon>
+        Zurück zur Liste
       </button>
-      <div class="bv-header-body">
-        <div class="bv-header-main">
-          <div>
-            <h1 class="bp-heading bv-title">{{ baustelle.name }}</h1>
-            <div class="bv-meta">
-              <span class="bp-mono">{{ baustelle.id }}</span>
-              <span class="bv-dot-sep">·</span>
-              <v-icon size="12" color="#94A3B8">mdi-map-marker-outline</v-icon>
-              {{ baustelle.adresse }}
-            </div>
-          </div>
-          <div class="bv-header-actions">
-            <span class="bp-status">
-              <span class="bp-dot" :class="`bp-dot--${baustelle.status}`" />
-              {{ statusLabel(baustelle.status) }}
-            </span>
-            <v-select
-              v-if="isSachbearbeiter"
-              v-model="selectedStatus"
-              :items="statusOptions"
-              density="compact"
-              variant="outlined"
-              hide-details
-              class="bv-status-select"
-              @update:model-value="updateStatus"
-            />
+      <div class="bv-header-main">
+        <div class="bv-header-left">
+          <h1 class="bp-heading bv-title">{{ baustelle.name }}</h1>
+          <div class="bv-meta">
+            <span class="bp-mono">{{ baustelle.id }}</span>
+            <span class="bv-dot-sep">·</span>
+            <v-icon size="12" color="#94A3B8">mdi-map-marker-outline</v-icon>
+            {{ baustelle.adresse }}
           </div>
         </div>
+        <v-select
+          v-if="isSachbearbeiter"
+          v-model="selectedStatus"
+          :items="statusOptions"
+          density="compact"
+          variant="outlined"
+          hide-details
+          style="width: 148px; max-width: 148px; flex-shrink: 0;"
+          @update:model-value="updateStatus"
+        />
+        <span v-else class="bp-status">
+          <span class="bp-dot" :class="`bp-dot--${baustelle.status}`" />
+          {{ statusLabel(baustelle.status) }}
+        </span>
       </div>
     </div>
 
@@ -162,6 +158,7 @@
               :items="maengelForBaustelle"
               item-value="id"
               hover
+              @click:row="(_: any, { item }: any) => router.push(`${isBauleiter ? '/bl' : '/sb'}/maengel/${item.id}`)"
             >
               <template #item.kategorie="{ item }">
                 <span class="bp-mono" style="font-size:10.5px;color:#64748B">{{ item.kategorie }}</span>
@@ -325,9 +322,11 @@ const statusOptions = [
   { title: 'Abgeschlossen', value: 'abgeschlossen' },
 ]
 const maengelStatusOptions = [
-  { title: 'Offen', value: 'offen' },
+  { title: 'Gemeldet', value: 'gemeldet' },
   { title: 'In Bearbeitung', value: 'in_bearbeitung' },
-  { title: 'Erledigt', value: 'erledigt' },
+  { title: 'Überprüft', value: 'ueberprueft' },
+  { title: 'Abgemahnt', value: 'abgemahnt' },
+  { title: 'Abgeschlossen', value: 'abgeschlossen' },
 ]
 const maengelHeaders = [
   { title: 'Kategorie', key: 'kategorie' },
@@ -411,33 +410,53 @@ function addDummyBild() {
 }
 
 .bv-page-header {
-  padding: 16px 24px 0;
+  padding: 12px 24px 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 .bv-back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  color: #94A3B8;
-  background: none;
-  border: none;
+  gap: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #475569;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 0;
-  transition: color 0.15s;
+  padding: 8px 14px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  align-self: flex-start;
 }
-.bv-back-btn:hover { color: #2563EB; }
+.bv-back-btn:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+  color: #0F172A;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.bv-back-btn:active {
+  background: #E2E8F0;
+  box-shadow: none;
+}
 
 .bv-header-main {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.bv-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .bv-title {
@@ -460,15 +479,9 @@ function addDummyBild() {
   color: #CBD5E1;
 }
 
-.bv-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
 .bv-status-select {
-  width: 170px;
+  width: 148px;
+  flex-shrink: 0;
 }
 
 .bv-tabs-wrap {
@@ -481,7 +494,7 @@ function addDummyBild() {
 }
 
 .bv-tab {
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: 'Barlow', sans-serif !important;
   font-size: 13px !important;
   text-transform: none !important;
   font-weight: 500 !important;
@@ -500,7 +513,7 @@ function addDummyBild() {
   background: #F1F5F9;
   color: #64748B;
   border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   font-weight: 500;
   margin-left: 4px;
@@ -635,7 +648,7 @@ function addDummyBild() {
 }
 
 .bv-data-link {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   color: #2563EB;
   text-decoration: none;
@@ -648,7 +661,7 @@ function addDummyBild() {
 }
 
 .bv-data-desc {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 12.5px;
   color: #475569;
   line-height: 1.6;
@@ -656,7 +669,7 @@ function addDummyBild() {
 }
 
 .bv-maengel-val {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
   font-weight: 700;
   color: #EF4444;
@@ -719,7 +732,7 @@ function addDummyBild() {
 }
 
 .bv-tl-title {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #0F172A;
@@ -788,7 +801,7 @@ function addDummyBild() {
 }
 
 .bv-dok-title {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #0F172A;
@@ -798,7 +811,7 @@ function addDummyBild() {
 }
 
 .bv-dok-meta {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9.5px;
   color: #94A3B8;
   letter-spacing: 0.04em;
@@ -809,7 +822,7 @@ function addDummyBild() {
 }
 
 .bv-dok-type-badge {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 8.5px;
   font-weight: 600;
   letter-spacing: 0.08em;

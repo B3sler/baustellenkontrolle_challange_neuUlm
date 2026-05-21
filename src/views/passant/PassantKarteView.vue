@@ -74,7 +74,7 @@ const maengelStore = useMaengelStore()
 .pk-dot--erledigt   { background: #22C55E; box-shadow: 0 0 4px rgba(34,197,94,0.6); }
 
 .pk-legend-label {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Barlow', sans-serif;
   font-size: 11.5px;
   font-weight: 500;
   color: #0F172A;
