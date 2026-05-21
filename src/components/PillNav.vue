@@ -103,9 +103,9 @@ function switchRole(role: Role) {
   top: 0;
   z-index: 200;
   height: 56px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 12px;
   padding: 0 20px;
   background: #ffffff;
   border-bottom: 1px solid #E2E8F0;
@@ -116,8 +116,6 @@ function switchRole(role: Role) {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0;
-  margin-right: 4px;
 }
 
 .pn-logo-name {
@@ -131,7 +129,6 @@ function switchRole(role: Role) {
 
 /* Pills */
 .pn-pills {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,6 +173,7 @@ function switchRole(role: Role) {
 
 /* Role switcher – segmented control */
 .pn-seg {
+  justify-self: end;
   display: flex;
   align-items: center;
   background: #F1F5F9;
