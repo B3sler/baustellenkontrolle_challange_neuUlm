@@ -6,6 +6,8 @@ Eine interaktive Frontend-Demo für das digitale Management von Baustellen, Män
 
 🔗 **Live-Demo:** [b3sler.github.io/baustellenkontrolle_challange_neuUlm](https://b3sler.github.io/baustellenkontrolle_challange_neuUlm/)
 
+> Die Demo ist passwortgeschützt. Zugang auf Anfrage.
+
 ---
 
 ## Überblick
@@ -18,7 +20,7 @@ NeuBautUlm bildet drei Nutzerrollen ab, die jeweils eigene Ansichten und Berecht
 | **Bauleiter:in** | Eigene Baustellen einsehen, Kommentare zu Mängeln abgeben, Dokumente und Fotos hochladen |
 | **Passant:in** | Mängel im öffentlichen Raum auf der Karte melden |
 
-Der Rollenwechsel erfolgt direkt über die Navigationsleiste — keine Authentifizierung erforderlich.
+Der Rollenwechsel erfolgt direkt über ein **Segmented Control** in der Navigationsleiste — alle drei Rollen sind jederzeit sichtbar und per Klick sofort wechselbar, ohne Dropdown.
 
 ---
 
@@ -85,7 +87,9 @@ Bauleiter können zu jedem Mangel Kommentare hinterlassen. Sachbearbeiter sehen 
 
 ### Design System (A2 Blueprint)
 - **Schriften:** Barlow Semi Condensed (Überschriften/KPIs) · Barlow (Fließtext/Buttons) · IBM Plex Mono (Daten/Labels/Badges)
-- **Farben:** Slate-Palette mit Blau (#2563EB) als Primärfarbe
+- **Farben:** Slate-Palette mit Blau (#2563EB) als Primärfarbe, Amber/Rot/Lila/Grün für Mängelstatus
+- **Navigation:** Segmented Control für Rollenwechsel (Sachbearbeiter blau · Bauleiter orange · Passant grün), Pill-Tabs für Seitennavigation, zentriert per CSS Grid
+- **Bilder:** Thematisch passende Unsplash-Fotos je Baustellentyp (Pflaster, Tiefbau, Kanal, Asphalt, Brücke, Promenade etc.)
 - Globale Design-Tokens in `src/styles/blueprint.css`
 
 ---
@@ -251,11 +255,30 @@ Jede Baustelle enthält automatisch einen **Antrag** und eine **Verkehrsrechtlic
 
 ---
 
+## Zugang & Passwortschutz
+
+Die Live-Demo auf GitHub Pages ist durch einen Passwort-Screen geschützt.
+
+- Passwort wird **nicht im Quellcode** gespeichert
+- Zur Build-Zeit via **GitHub Repository Secret** (`VITE_GATE_PASSWORD`) injiziert
+- Lokal über `.env.local` konfiguriert (gitigniert)
+- **Session-basiert** — der Zugang verfällt automatisch beim Schließen des Browser-Tabs
+
+Für lokale Entwicklung `.env.local` anlegen:
+
+```bash
+VITE_GATE_PASSWORD=DemoKanu2026
+```
+
+Für GitHub Pages das Secret unter `Settings → Secrets and variables → Actions → New repository secret` hinterlegen.
+
+---
+
 ## Bekannte Einschränkungen (Scope v1)
 
 - Kein echtes Backend / keine Persistenz — alle Daten gehen beim Reload verloren
 - Kein echter Datei-Upload — Dokumente und Bilder sind nur Dummy-Einträge
-- Kein Login / keine echte Rollentrennung — Rollenwechsel ist nur ein UI-Toggle
+- Passwortschutz ist rein clientseitig — das Passwort liegt nach dem Build im JS-Bundle
 - Routenplanung verwendet Haversine-Distanz (Luftlinie), keine echten Straßendistanzen
 - Kartenmarker verwenden feste Mock-Koordinaten in der Nähe von Neu-Ulm
 - Nur Desktop optimiert — Mobile-Feintuning ist für eine spätere Version geplant
